@@ -49,21 +49,25 @@ public class InsomniaView extends JFrame {
         setJMenuBar(menuBar);
     }
 
-    
+
     private void initFrame(){
         setSize(1175, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         MenuBarInit();
+
         leftPanel = new LeftPanel();
         middlePanel = new MiddlePanel();
         rightPanel = new RightPanel();
+
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, middlePanel);
         JSplitPane splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitPane1, rightPanel);
         splitPane1.setDividerLocation(265);
         splitPane2.setDividerLocation(770);
         splitPane1.setDividerSize(3);
         splitPane2.setDividerSize(3);
+
         add(splitPane2, BorderLayout.CENTER);
         setVisible(true);
     }
