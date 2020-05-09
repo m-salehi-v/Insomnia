@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class MiddlePanel extends JPanel{
     private JPanel topPanel;
@@ -13,6 +14,9 @@ public class MiddlePanel extends JPanel{
 
         topPanelInit();
         add(topPanel, BorderLayout.NORTH);
+
+        tabsInit();
+        add(tabs, BorderLayout.CENTER);
     }
 
     private void topPanelInit(){
@@ -28,11 +32,16 @@ public class MiddlePanel extends JPanel{
         JTextField urlField = new JTextField("Enter URL here");
         urlField.setFont(new Font("Arial", Font.PLAIN, 12));
         urlField.setForeground(Color.DARK_GRAY);
-        urlField.addFocusListener(new FocusAdapter() {
+        urlField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (urlField.getText().equals("Enter URL here"))
                     urlField.setText("");
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (urlField.getText().equals(""))
+                    urlField.setText("Enter URL here");
             }
         });
 
@@ -51,5 +60,9 @@ public class MiddlePanel extends JPanel{
         topPanel.add(method, BorderLayout.WEST);
         topPanel.add(urlField, BorderLayout.CENTER);
         topPanel.add(buttonsPanel, BorderLayout.EAST);
+    }
+
+    private void tabsInit(){
+        tabs = new JTabbedPane();
     }
 }
