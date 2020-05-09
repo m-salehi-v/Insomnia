@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class LeftPanel extends JPanel {
     private JLabel logo;
-    DefaultListModel<Request> requestsListModel;
+    private DefaultListModel<Request> requestsListModel;
 
     public LeftPanel() {
         super();

@@ -65,8 +65,8 @@ public class InsomniaView extends JFrame {
         JSplitPane splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitPane1, rightPanel);
         splitPane1.setDividerLocation(265);
         splitPane2.setDividerLocation(770);
-        splitPane1.setDividerSize(3);
-        splitPane2.setDividerSize(3);
+        splitPane1.setDividerSize(1);
+        splitPane2.setDividerSize(1);
 
         add(splitPane2, BorderLayout.CENTER);
         setVisible(true);

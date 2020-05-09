@@ -6,7 +6,7 @@ public class Main {
 //        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
