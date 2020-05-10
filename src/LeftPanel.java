@@ -1,3 +1,6 @@
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,6 +15,30 @@ public class LeftPanel extends JPanel {
 
         logoInit();
         requestsListInit();
+
+        addRequest(new Request("My Request1", "GET"));
+        addRequest(new Request("My Request2", "POST"));
+        addRequest(new Request("My Request3", "PUT"));
+        addRequest(new Request("My Request4", "PATCH"));
+        addRequest(new Request("My Request5", "DELETE"));
+
+        addRequest(new Request("My Request1", "GET"));
+        addRequest(new Request("My Request2", "POST"));
+        addRequest(new Request("My Request3", "PUT"));
+        addRequest(new Request("My Request4", "PATCH"));
+        addRequest(new Request("My Request5", "DELETE"));
+
+        addRequest(new Request("My Request1", "GET"));
+        addRequest(new Request("My Request2", "POST"));
+        addRequest(new Request("My Request3", "PUT"));
+        addRequest(new Request("My Request4", "PATCH"));
+        addRequest(new Request("My Request5", "DELETE"));
+
+        addRequest(new Request("My Request1", "GET"));
+        addRequest(new Request("My Request2", "POST"));
+        addRequest(new Request("My Request3", "PUT"));
+        addRequest(new Request("My Request4", "PATCH"));
+        addRequest(new Request("My Request5", "DELETE"));
 
         addRequest(new Request("My Request1", "GET"));
         addRequest(new Request("My Request2", "POST"));
@@ -58,19 +85,19 @@ public class LeftPanel extends JPanel {
             String type = value.getType();
             switch (type) {
                 case "GET":
-                    type = "<font style=\"color : rgb(171, 158, 221)\">&ensp; GET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    type = "<font style=\"color : rgb(171, 158, 221)\">&ensp; GET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 case "POST":
-                    type = "<font style=\"color : rgb(132, 186, 77)\">&ensp; POST &nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    type = "<font style=\"color : rgb(132, 186, 77)\">&ensp; POST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 case "PUT":
-                    type = "<font style=\"color : rgb(223, 160, 81)\">&ensp; PUT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    type = "<font style=\"color : rgb(223, 160, 81)\">&ensp; PUT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 case "PATCH":
                     type = "<font style=\"color : rgb(193, 174, 61)\">&ensp; PTCH &nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 default:
-                    type = "<font style=\"color : rgb(226, 139, 138)\">&ensp; DEL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    type = "<font style=\"color : rgb(226, 139, 138)\">&ensp; DEL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
             }
 

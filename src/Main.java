@@ -1,16 +1,14 @@
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 
 public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-//        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            FlatDarkLaf.install();
         } catch (Exception e) {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }

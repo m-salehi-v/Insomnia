@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aeda6928-7fdc-4358-a54b-0b37125cdea4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_0_34.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Insomnia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Insomnia.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel$RequestRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel$RequestRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InsomniaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InsomniaView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LeftPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LeftPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MiddlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiddlePanel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +36,12 @@
   <component name="ProjectId" id="1bBURImo0V8VZFNp32NJeF3pwmf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Calculator" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/flatlaf-0.34.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
