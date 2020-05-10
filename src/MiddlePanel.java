@@ -208,7 +208,8 @@ public class MiddlePanel extends JPanel {
         public void focusGained(FocusEvent e) {
             JTextField field = (JTextField) e.getSource();
             prevText = field.getText();
-            if (field.getText().equals("Enter URL here") || field.getText().equals("Header") || field.getText().equals("Value"))
+            if (field.getText().equals("Enter URL here") || field.getText().equals("Header") || field.getText().equals("Value")
+            || field.getText().equals("Name"))
                 field.setText("");
         }
 
@@ -216,12 +217,20 @@ public class MiddlePanel extends JPanel {
         public void focusLost(FocusEvent e) {
             JTextField field = (JTextField) e.getSource();
             if (field.getText().equals("")) {
-                if (prevText.equals("Enter URL here"))
-                    field.setText("Enter URL here");
-                else if (prevText.equals("Header"))
-                    field.setText("Header");
-                else
-                    field.setText("Value");
+                switch (prevText) {
+                    case "Enter URL here":
+                        field.setText("Enter URL here");
+                        break;
+                    case "Header":
+                        field.setText("Header");
+                        break;
+                    case "Value":
+                        field.setText("Value");
+                        break;
+                    default:
+                        field.setText("Name");
+                        break;
+                }
             }
         }
     }
