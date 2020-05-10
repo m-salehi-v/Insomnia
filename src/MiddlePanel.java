@@ -7,6 +7,7 @@ public class MiddlePanel extends JPanel {
     private JPanel topPanel;
     private JTabbedPane tabs;
     private JPanel header;
+    private JPanel query;
 
     public MiddlePanel() {
         super();
@@ -53,12 +54,19 @@ public class MiddlePanel extends JPanel {
         header = new JPanel();
         header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
         header.setBackground(new Color(46, 47, 43));
-        header.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        header.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         JScrollPane headerScrollable = new JScrollPane(header);
+
+        ArrayList<JPanel> queries = new ArrayList<>();
+        query = new JPanel();
+        query.setLayout(new BoxLayout(query, BoxLayout.Y_AXIS));
+        query.setBackground(new Color(46, 47, 43));
+        query.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+        JScrollPane queryScrollable = new JScrollPane(query);
 
         tabs.add(null, "Body");
         tabs.add(null, "Auth");
-        tabs.add(null, "Query");
+        tabs.add(queryScrollable, "Query");
         tabs.add(headerScrollable, "Header");
 
         tabs.setFont(new Font(null, Font.PLAIN, 13));
@@ -68,16 +76,17 @@ public class MiddlePanel extends JPanel {
         tabs.setForegroundAt(2, new Color(187, 187, 187));
         tabs.setForegroundAt(3, new Color(187, 187, 187));
 
-        addHeader(headers);
+        addHeaderOrQuery(headers, 1);
+        addHeaderOrQuery(queries, 2);
     }
 
-    private JPanel createHeader(ArrayList<JPanel> headers, int type) {
+    private JPanel createItem(ArrayList<JPanel> items, int type, boolean newItem) { //0 for new 1 for header 2 for query
 
         JPanel panel = new JPanel();
         panel.setBackground(new Color(46, 47, 43));
         panel.setLayout(new BorderLayout(10, 0));
         panel.setMaximumSize(new Dimension(2000, 50));
-        panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 0));
 
         JPanel textFields = new JPanel();
         textFields.setBackground(new Color(46, 47, 43));
@@ -85,27 +94,35 @@ public class MiddlePanel extends JPanel {
 
         ImageIcon headerIcon;
         JLabel label = new JLabel();
-        if (type == 1)
-            headerIcon = new ImageIcon(this.getClass().getResource("res/header.png"));
-        else {
+        if (newItem) {
             headerIcon = new ImageIcon(this.getClass().getResource("res/settingIcon.png"));
-            label.addMouseListener(new deleteAllHandler(headers));
+            label.addMouseListener(new deleteAllHandler(items, type));
+        }
+        else{
+            headerIcon = new ImageIcon(this.getClass().getResource("res/header.png"));
         }
         label.setIcon(headerIcon);
         panel.add(label, BorderLayout.WEST);
 
         JTextField textField1 = new JTextField();
-        if (type == 1) {
-            textField1.setText("Header");
-            textField1.addFocusListener(new PromptTextHandler());
-        } else {
-            textField1 = new JTextField("New Header");
+        if (newItem){
+            if (type == 1)
+                textField1 = new JTextField("New Header");
+            else
+                textField1 = new JTextField("New Name");
             textField1.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    addHeader(headers);
+                    addHeaderOrQuery(items, type);
                 }
             });
+        }
+        else if (type == 1) {
+            textField1.setText("Header");
+            textField1.addFocusListener(new PromptTextHandler());
+        } else {
+            textField1.setText("Name");
+            textField1.addFocusListener(new PromptTextHandler());
         }
         textField1.setForeground(Color.GRAY);
         textField1.setMaximumSize(new Dimension(2000, 25));
@@ -113,17 +130,17 @@ public class MiddlePanel extends JPanel {
         textField1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(107, 107, 107)));
 
         JTextField textField2 = new JTextField();
-        if (type == 1) {
-            textField2.setText("Value");
-            textField2.addFocusListener(new PromptTextHandler());
-        } else {
+        if (newItem){
             textField2.setText("New Value");
             textField2.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    addHeader(headers);
+                    addHeaderOrQuery(items, type);
                 }
             });
+        } else {
+            textField2.setText("Value");
+            textField2.addFocusListener(new PromptTextHandler());
         }
         textField2.setForeground(Color.GRAY);
         textField2.setMaximumSize(new Dimension(2000, 25));
@@ -136,7 +153,9 @@ public class MiddlePanel extends JPanel {
 
         JPanel buttons = new JPanel();
         buttons.setBackground(new Color(46, 47, 43));
-        if (type == 1) {
+        if (newItem)
+            buttons.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 40));
+        else  {
             buttons.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
             JCheckBox checkBox = new JCheckBox();
             checkBox.addActionListener(new CheckBoxActionHandler(textField1, textField2));
@@ -146,34 +165,40 @@ public class MiddlePanel extends JPanel {
             deleteB.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    headers.remove(panel);
-                    updateHeader(headers);
+                    items.remove(panel);
+                    updateHeaderAndQuery(items, type);
                     updateUI();
                 }
             });
             deleteB.setToolTipText("Delete this item");
             buttons.add(checkBox);
             buttons.add(deleteB);
-        } else {
-            buttons.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 40));
         }
         panel.add(textFields, BorderLayout.CENTER);
         panel.add(buttons, BorderLayout.EAST);
         return panel;
     }
 
-    private void addHeader(ArrayList<JPanel> headers) {
-        headers.add(createHeader(headers, 1));
-        updateHeader(headers);
-        updateUI();
+    private void addHeaderOrQuery(ArrayList<JPanel> items, int type) {
+            items.add(createItem(items, type, false));
+            updateHeaderAndQuery(items, type);
+            updateUI();
     }
 
-    private void updateHeader(ArrayList<JPanel> headers) {
-        header.removeAll();
-        for (JPanel jPanel : headers) {
-            header.add(jPanel);
+    private void updateHeaderAndQuery(ArrayList<JPanel> items, int type) {
+        if (type == 1) {
+            header.removeAll();
+            for (JPanel jPanel : items) {
+                header.add(jPanel);
+            }
+            header.add(createItem(items, 1, true));
+        } else {
+            query.removeAll();
+            for (JPanel jPanel : items) {
+                query.add(jPanel);
+            }
+            query.add(createItem(items,2, true));
         }
-        header.add(createHeader(headers, 2));
     }
 
     private static class PromptTextHandler implements FocusListener {
@@ -231,9 +256,11 @@ public class MiddlePanel extends JPanel {
 
     private class deleteAllHandler extends MouseAdapter{
         ArrayList<JPanel> headers;
+        int type;
 
-        public deleteAllHandler(ArrayList<JPanel> headers) {
+        public deleteAllHandler(ArrayList<JPanel> headers, int type) {
             this.headers = headers;
+            this.type = type;
         }
 
         @Override
@@ -246,7 +273,7 @@ public class MiddlePanel extends JPanel {
                     if (headers.size() > 0) {
                         headers.subList(0, headers.size()).clear();
                     }
-                    updateHeader(headers);
+                    updateHeaderAndQuery(headers, type);
                     updateUI();
                 }
             });
