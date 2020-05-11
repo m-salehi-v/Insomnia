@@ -8,6 +8,7 @@ public class MiddlePanel extends JPanel {
     private JTabbedPane tabs;
     private JPanel header;
     private JPanel query;
+    private JPanel auth;
 
     public MiddlePanel() {
         super();
@@ -64,8 +65,10 @@ public class MiddlePanel extends JPanel {
         query.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         JScrollPane queryScrollable = new JScrollPane(query);
 
+        authInit();
+
         tabs.add(null, "Body");
-        tabs.add(null, "Auth");
+        tabs.add(auth, "Auth");
         tabs.add(queryScrollable, "Query");
         tabs.add(headerScrollable, "Header");
 
@@ -75,9 +78,8 @@ public class MiddlePanel extends JPanel {
         tabs.setForegroundAt(1, new Color(187, 187, 187));
         tabs.setForegroundAt(2, new Color(187, 187, 187));
         tabs.setForegroundAt(3, new Color(187, 187, 187));
-
-        addHeaderOrQuery(headers, 1);
-        addHeaderOrQuery(queries, 2);
+        updateHeaderAndQuery(headers, 1);
+        updateHeaderAndQuery(queries, 2);
     }
 
     private JPanel createItem(ArrayList<JPanel> items, int type, boolean newItem) { //0 for new 1 for header 2 for query
@@ -159,6 +161,7 @@ public class MiddlePanel extends JPanel {
             buttons.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
             JCheckBox checkBox = new JCheckBox();
             checkBox.addActionListener(new CheckBoxActionHandler(textField1, textField2));
+            checkBox.setSelected(true);
 
             ImageIcon delIcon = new ImageIcon(this.getClass().getResource("res/delete.png"));
             JButton deleteB = new JButton(delIcon);
@@ -199,6 +202,55 @@ public class MiddlePanel extends JPanel {
             }
             query.add(createItem(items,2, true));
         }
+    }
+
+    private void authInit(){
+        auth = new JPanel();
+        auth.setLayout(new BoxLayout(auth, BoxLayout.Y_AXIS));
+        auth.setBackground(new Color(46, 47, 43));
+        auth.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+
+        JTextField textFieldToken = new JTextField();
+        JTextField textFieldPrefix = new JTextField();
+        JCheckBox checkBox = new JCheckBox();
+        JPanel[] panels = new JPanel[3];
+        JLabel[] labels = new JLabel[3];
+        labels[0] = new JLabel("TOKEN");
+        labels[1] = new JLabel("PREFIX");
+        labels[2] = new JLabel("ENABLED");
+        for (int i = 0; i < 3; i++){
+            panels[i] = new JPanel();
+            panels[i].setBackground(new Color(46, 47, 43));
+            panels[i].setLayout(new BorderLayout(10, 0));
+            panels[i].setMaximumSize(new Dimension(2000, 50));
+            panels[i].setBorder(BorderFactory.createEmptyBorder(0, 10, 20, 20));
+
+            labels[i].setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 20));
+            labels[i].setForeground(Color.LIGHT_GRAY);
+            labels[i].setFont(new Font(null, Font.PLAIN, 10));
+        }
+
+        textFieldToken.setForeground(Color.LIGHT_GRAY);
+        textFieldToken.setBackground(new Color(46, 47, 43));
+        textFieldToken.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(107, 107, 107)));
+        panels[0].add(labels[0], BorderLayout.WEST);
+        panels[0].add(textFieldToken, BorderLayout.CENTER);
+
+        textFieldPrefix.setForeground(Color.LIGHT_GRAY);
+        textFieldPrefix.setBackground(new Color(46, 47, 43));
+        textFieldPrefix.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(107, 107, 107)));
+        panels[1].add(labels[1], BorderLayout.WEST);
+        panels[1].add(textFieldPrefix, BorderLayout.CENTER);
+
+        checkBox.setSelected(true);
+        checkBox.addActionListener(new CheckBoxActionHandler(textFieldToken, textFieldPrefix));
+        panels[2].add(labels[2], BorderLayout.WEST);
+        panels[2].add(checkBox, BorderLayout.CENTER);
+
+        auth.add(panels[0]);
+        auth.add(panels[1]);
+        auth.add(panels[2]);
+
     }
 
     private static class PromptTextHandler implements FocusListener {
@@ -248,7 +300,7 @@ public class MiddlePanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             JCheckBox cb = (JCheckBox) e.getSource();
-            if (cb.isSelected()) {
+            if (!cb.isSelected()) {
                 textField1.setForeground(new Color(76, 76, 76));
                 textField2.setForeground(new Color(76, 76, 76));
                 textField1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(76, 76, 76)));
