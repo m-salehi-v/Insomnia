@@ -9,6 +9,7 @@ public class MiddlePanel extends JPanel {
     private JPanel header;
     private JPanel query;
     private JPanel auth;
+    private JPanel formData;
 
     public MiddlePanel() {
         super();
@@ -67,7 +68,14 @@ public class MiddlePanel extends JPanel {
 
         authInit();
 
-        tabs.add(null, "Body");
+        ArrayList<JPanel> data = new ArrayList<>();
+        formData = new JPanel();
+        formData.setLayout(new BoxLayout(formData, BoxLayout.Y_AXIS));
+        formData.setBackground(new Color(46, 47, 43));
+        formData.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+        JScrollPane formDataScrollable = new JScrollPane(formData);
+
+        tabs.add(formDataScrollable, "Body");
         tabs.add(auth, "Auth");
         tabs.add(queryScrollable, "Query");
         tabs.add(headerScrollable, "Header");
@@ -78,8 +86,9 @@ public class MiddlePanel extends JPanel {
         tabs.setForegroundAt(1, new Color(187, 187, 187));
         tabs.setForegroundAt(2, new Color(187, 187, 187));
         tabs.setForegroundAt(3, new Color(187, 187, 187));
-        updateHeaderAndQuery(headers, 1);
-        updateHeaderAndQuery(queries, 2);
+        updateHeaderQueryForm(headers, 1);
+        updateHeaderQueryForm(queries, 2);
+        updateHeaderQueryForm(data, 3);
     }
 
     private JPanel createItem(ArrayList<JPanel> items, int type, boolean newItem) { //0 for new 1 for header 2 for query
@@ -115,7 +124,7 @@ public class MiddlePanel extends JPanel {
             textField1.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    addHeaderOrQuery(items, type);
+                    addHeaderQueryForm(items, type);
                 }
             });
         }
@@ -137,7 +146,7 @@ public class MiddlePanel extends JPanel {
             textField2.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    addHeaderOrQuery(items, type);
+                    addHeaderQueryForm(items, type);
                 }
             });
         } else {
@@ -169,7 +178,7 @@ public class MiddlePanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     items.remove(panel);
-                    updateHeaderAndQuery(items, type);
+                    updateHeaderQueryForm(items, type);
                     updateUI();
                 }
             });
@@ -182,26 +191,25 @@ public class MiddlePanel extends JPanel {
         return panel;
     }
 
-    private void addHeaderOrQuery(ArrayList<JPanel> items, int type) {
+    private void addHeaderQueryForm(ArrayList<JPanel> items, int type) {
             items.add(createItem(items, type, false));
-            updateHeaderAndQuery(items, type);
+            updateHeaderQueryForm(items, type);
             updateUI();
     }
 
-    private void updateHeaderAndQuery(ArrayList<JPanel> items, int type) {
-        if (type == 1) {
-            header.removeAll();
-            for (JPanel jPanel : items) {
-                header.add(jPanel);
-            }
-            header.add(createItem(items, 1, true));
-        } else {
-            query.removeAll();
-            for (JPanel jPanel : items) {
-                query.add(jPanel);
-            }
-            query.add(createItem(items,2, true));
-        }
+    private void updateHeaderQueryForm(ArrayList<JPanel> items, int type) {
+        JPanel target;
+        if (type == 1)
+            target = header;
+        else if (type == 2)
+            target = query;
+        else
+            target = formData;
+
+        target.removeAll();
+        for (JPanel jPanel : items)
+            target.add(jPanel);
+        target.add(createItem(items,type, true));
     }
 
     private void authInit(){
@@ -334,7 +342,7 @@ public class MiddlePanel extends JPanel {
                     if (headers.size() > 0) {
                         headers.subList(0, headers.size()).clear();
                     }
-                    updateHeaderAndQuery(headers, type);
+                    updateHeaderQueryForm(headers, type);
                     updateUI();
                 }
             });
