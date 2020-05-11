@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 public class InsomniaView extends JFrame {
 
     private JMenuBar menuBar;
+    private JSplitPane splitPane1;
+    private JSplitPane splitPane2;
     private LeftPanel leftPanel;
     private MiddlePanel middlePanel;
     private RightPanel rightPanel;
@@ -32,6 +36,17 @@ public class InsomniaView extends JFrame {
         toggleFullScreen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
         JMenuItem toggleSidebar = new JMenuItem("Toggle Sidebar", 'S');
         toggleSidebar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, KeyEvent.CTRL_DOWN_MASK));
+        toggleSidebar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (leftPanel.isVisible())
+                    leftPanel.setVisible(false);
+                else {
+                    leftPanel.setVisible(true);
+                    splitPane1.setDividerLocation(265);
+                }
+            }
+        });
         viewMenu.add(toggleFullScreen);
         viewMenu.add(toggleSidebar);
 
@@ -61,8 +76,8 @@ public class InsomniaView extends JFrame {
         middlePanel = new MiddlePanel();
         rightPanel = new RightPanel();
 
-        JSplitPane splitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, middlePanel);
-        JSplitPane splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitPane1, rightPanel);
+        splitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, middlePanel);
+        splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitPane1, rightPanel);
         splitPane1.setDividerLocation(265);
         splitPane2.setDividerLocation(770);
         splitPane1.setDividerSize(2);
