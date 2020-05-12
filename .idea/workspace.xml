@@ -3,17 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="aeda6928-7fdc-4358-a54b-0b37125cdea4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel$RequestRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel$RequestRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$CheckBoxActionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$CheckBoxActionHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LeftPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LeftPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MiddlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiddlePanel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

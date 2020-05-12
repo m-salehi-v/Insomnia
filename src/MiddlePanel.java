@@ -10,6 +10,7 @@ public class MiddlePanel extends JPanel {
     private JPanel query;
     private JPanel auth;
     private JPanel formData;
+    private JPanel noBody;
 
     public MiddlePanel() {
         super();
@@ -75,7 +76,9 @@ public class MiddlePanel extends JPanel {
         formData.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         JScrollPane formDataScrollable = new JScrollPane(formData);
 
-        tabs.add(formDataScrollable, "Body");
+        noBodyInit();
+
+        tabs.add(noBody, "Body");
         tabs.add(auth, "Auth");
         tabs.add(queryScrollable, "Query");
         tabs.add(headerScrollable, "Header");
@@ -89,6 +92,21 @@ public class MiddlePanel extends JPanel {
         updateHeaderQueryForm(headers, 1);
         updateHeaderQueryForm(queries, 2);
         updateHeaderQueryForm(data, 3);
+
+        JLabel bodyTabLabel = new JLabel("No Body");
+        bodyTabLabel.addMouseListener(new selectTabHandler());
+        tabs.setTabComponentAt(0, bodyTabLabel);
+    }
+
+    private void noBodyInit(){
+        noBody = new JPanel(new BorderLayout(50,50));
+        noBody.setBackground(new Color(46, 47, 43));
+        JLabel label = new JLabel("Select a body type from above");
+        label.setFont(new Font(null, Font.BOLD, 14));
+        label.setBackground(new Color(46, 47, 43));
+        label.setForeground(Color.GRAY);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        noBody.add(label, BorderLayout.CENTER);
     }
 
     private JPanel createItem(ArrayList<JPanel> items, int type, boolean newItem) { //0 for new 1 for header 2 for query
@@ -354,5 +372,44 @@ public class MiddlePanel extends JPanel {
                         e.getX(), e.getY() + 5);
             }
         }
+    }
+
+    private class selectTabHandler extends MouseAdapter{
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            JPopupMenu popupMenu = new JPopupMenu();
+            JMenuItem menuItem1 = new JMenuItem("Form Data");
+            JMenuItem menuItem2 = new JMenuItem("JSON");
+            JMenuItem menuItem3 = new JMenuItem("Binary");
+            JMenuItem menuItem4 = new JMenuItem("No Body");
+            menuItem1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel formDataLabel = new JLabel("Form Data");
+                    formDataLabel.addMouseListener(new selectTabHandler());
+                    tabs.setTabComponentAt(0, formDataLabel);
+                    tabs.setComponentAt(0, new JScrollPane(formData));
+                    revalidate();
+                }
+            });
+            menuItem4.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel noBodyLabel = new JLabel("No Body");
+                    noBodyLabel.addMouseListener(new selectTabHandler());
+                    tabs.setTabComponentAt(0, noBodyLabel);
+                    tabs.setComponentAt(0, noBody);
+                    revalidate();
+                }
+            });
+            popupMenu.add(menuItem1);
+            popupMenu.add(menuItem2);
+            popupMenu.add(menuItem3);
+            popupMenu.add(menuItem4);
+            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON1) {
+                popupMenu.show(e.getComponent(), e.getX(), e.getY() + 5);
+            }
+        }
+
     }
 }
