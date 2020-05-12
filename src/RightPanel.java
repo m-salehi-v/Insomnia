@@ -3,6 +3,8 @@ import java.awt.*;
 
 public class RightPanel extends JPanel {
     private JPanel topPanel;
+    private JTabbedPane tabs;
+    private JPanel header;
 
     public RightPanel() {
         super();
@@ -10,6 +12,9 @@ public class RightPanel extends JPanel {
 
         topPanelInit();
         add(topPanel, BorderLayout.NORTH);
+
+        tabsInit();
+        add(tabs, BorderLayout.CENTER);
     }
 
 
@@ -21,6 +26,18 @@ public class RightPanel extends JPanel {
         topPanel.add(createStatusLabel(0, "Error"));
         topPanel.add(createTimeLabel(0));
         topPanel.add(createSizeLabel(0));
+    }
+
+    private void tabsInit(){
+        tabs = new JTabbedPane();
+
+        headerInit();
+
+        tabs.add(null, "Preview");
+        tabs.add(new JScrollPane(header), "Header");
+        tabs.setFont(new Font(null, Font.PLAIN, 13));
+        tabs.setForegroundAt(0, new Color(187, 187, 187));
+        tabs.setForegroundAt(1, new Color(187, 187, 187));
     }
 
     private JLabel createStatusLabel(int statusCode, String statusMessage) {
@@ -60,5 +77,51 @@ public class RightPanel extends JPanel {
         statusLabel.setFont(new Font(null, Font.PLAIN, 12));
         statusLabel.setOpaque(true);
         return statusLabel;
+    }
+
+    private void headerInit(){
+        header = new JPanel();
+        header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
+        header.setBackground(new Color(46, 47, 43));
+        header.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+        addHeader("NAME", "VALUE");
+        addHeader("Date", "Mon, 11 May 2020 19:24:00 GMT");
+        addHeader("Alt-Svc" , "h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-Q050=\":443\";" +
+                " ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443" +
+                "\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"");
+        addHeader("Set-Cookie", "1P_JAR=2020-05-11-19; expires=Wed, 10-Jun-2020 19:24:00 GMT; path=/; domain=.google.com; Secure");
+    }
+    private void addHeader(String key, String value){
+
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(46, 47, 43));
+        panel.setLayout(new BorderLayout(10, 0));
+        panel.setMaximumSize(new Dimension(380, 500));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+
+        JPanel textAreas = new JPanel();
+        textAreas.setBackground(new Color(46, 47, 43));
+        textAreas.setLayout(new BoxLayout(textAreas, BoxLayout.X_AXIS));
+
+        JTextArea textArea1 = new JTextArea();
+        textArea1.setText(key);
+        textArea1.setForeground(Color.GRAY);
+        textArea1.setBackground(new Color(46, 47, 43));
+        textArea1.setLineWrap(true);
+
+        JTextArea textArea2 = new JTextArea();
+        textArea2.setText(value);
+        textArea2.setForeground(Color.GRAY);
+        textArea2.setBackground(new Color(46, 47, 43));
+        textArea2.setLineWrap(true);
+
+        textAreas.add(textArea1);
+        textAreas.add(Box.createRigidArea(new Dimension(20, 0)));
+        textAreas.add(textArea2);
+
+        panel.add(textAreas, BorderLayout.NORTH);
+
+        header.add(panel);
     }
 }
