@@ -3,10 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="aeda6928-7fdc-4358-a54b-0b37125cdea4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InsomniaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InsomniaView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MiddlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiddlePanel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -99,6 +99,7 @@ public class InsomniaView extends JFrame {
         setSize(1175, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon("src/res/Insomnia.png").getImage());
 
         MenuBarInit();
 
@@ -154,10 +155,11 @@ public class InsomniaView extends JFrame {
     }
 
     private void showOptionsFrame(){
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Options");
         frame.setLocationRelativeTo(null);
         frame.setSize(300,150);
         frame.setResizable(false);
+        frame.setIconImage(new ImageIcon("src/res/Insomnia.png").getImage());
 
         JPanel framePanel = new JPanel(new BorderLayout(10,10));
         framePanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
