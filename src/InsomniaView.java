@@ -83,6 +83,13 @@ public class InsomniaView extends JFrame {
         JMenu helpMenu = new JMenu("Help");
         helpMenu.setMnemonic('H');
         JMenuItem about = new JMenuItem("About", 'A');
+        about.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Developed by Mohammad Salehi Vaziri\n" +
+                        "ID: 9831037\nemail: mohammadsalehivaziri@gmail.com\n","About", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
         JMenuItem help = new JMenuItem("Help", 'H');
         help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         helpMenu.add(about);
