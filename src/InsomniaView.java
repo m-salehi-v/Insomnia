@@ -12,6 +12,7 @@ public class InsomniaView extends JFrame {
     private LeftPanel leftPanel;
     private MiddlePanel middlePanel;
     private RightPanel rightPanel;
+    private boolean isFullScreen;
 
     public InsomniaView() {
         super("Insomnia");
@@ -34,6 +35,18 @@ public class InsomniaView extends JFrame {
         viewMenu.setMnemonic('V');
         JMenuItem toggleFullScreen = new JMenuItem("Toggle Full Screen", 'F');
         toggleFullScreen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
+        toggleFullScreen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!isFullScreen){
+                    setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    isFullScreen = true;
+                } else {
+                    setExtendedState(JFrame.NORMAL);
+                    isFullScreen = false;
+                }
+            }
+        });
         JMenuItem toggleSidebar = new JMenuItem("Toggle Sidebar", 'S');
         toggleSidebar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, KeyEvent.CTRL_DOWN_MASK));
         toggleSidebar.addActionListener(new ActionListener() {
