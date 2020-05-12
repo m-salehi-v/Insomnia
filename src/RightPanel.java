@@ -5,6 +5,7 @@ public class RightPanel extends JPanel {
     private JPanel topPanel;
     private JTabbedPane tabs;
     private JPanel header;
+    private JPanel preview;
 
     public RightPanel() {
         super();
@@ -20,7 +21,7 @@ public class RightPanel extends JPanel {
 
     private void topPanelInit() {
         topPanel = new JPanel();
-        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 9));
+        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
         topPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
 
         topPanel.add(createStatusLabel(0, "Error"));
@@ -33,7 +34,10 @@ public class RightPanel extends JPanel {
 
         headerInit();
 
-        tabs.add(null, "Preview");
+        preview = new JPanel();
+        preview.setBackground(new Color(46, 47, 43));
+
+        tabs.add(preview, "Preview");
         tabs.add(new JScrollPane(header), "Header");
         tabs.setFont(new Font(null, Font.PLAIN, 13));
         tabs.setForegroundAt(0, new Color(187, 187, 187));

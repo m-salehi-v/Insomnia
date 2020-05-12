@@ -37,18 +37,18 @@ public class MiddlePanel extends JPanel {
         urlField.setForeground(new Color(187, 187, 187));
         urlField.addFocusListener(new PromptTextHandler());
 
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+//        JPanel buttonsPanel = new JPanel();
+//        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
         JButton send = new JButton("Send");
-        send.setPreferredSize(new Dimension(send.getPreferredSize().width, send.getPreferredSize().height));
-        JButton save = new JButton("Save");
-        save.setPreferredSize(new Dimension(save.getPreferredSize().width, save.getPreferredSize().height));
-        buttonsPanel.add(send);
-        buttonsPanel.add(save);
+        send.setPreferredSize(new Dimension(send.getPreferredSize().width, send.getPreferredSize().height + 21));
+//        JButton save = new JButton("Save");
+//        save.setPreferredSize(new Dimension(save.getPreferredSize().width, save.getPreferredSize().height));
+//        buttonsPanel.add(send);
+//        buttonsPanel.add(save);
 
         topPanel.add(method, BorderLayout.WEST);
         topPanel.add(urlField, BorderLayout.CENTER);
-        topPanel.add(buttonsPanel, BorderLayout.EAST);
+        topPanel.add(send, BorderLayout.EAST);
     }
 
     private void tabsInit() {
