@@ -3,6 +3,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LeftPanel extends JPanel {
     private JLabel logo;
@@ -15,36 +17,6 @@ public class LeftPanel extends JPanel {
 
         logoInit();
         requestsListInit();
-
-        addRequest(new Request("My Request1", "GET"));
-        addRequest(new Request("My Request2", "POST"));
-        addRequest(new Request("My Request3", "PUT"));
-        addRequest(new Request("My Request4", "PATCH"));
-        addRequest(new Request("My Request5", "DELETE"));
-
-        addRequest(new Request("My Request1", "GET"));
-        addRequest(new Request("My Request2", "POST"));
-        addRequest(new Request("My Request3", "PUT"));
-        addRequest(new Request("My Request4", "PATCH"));
-        addRequest(new Request("My Request5", "DELETE"));
-
-        addRequest(new Request("My Request1", "GET"));
-        addRequest(new Request("My Request2", "POST"));
-        addRequest(new Request("My Request3", "PUT"));
-        addRequest(new Request("My Request4", "PATCH"));
-        addRequest(new Request("My Request5", "DELETE"));
-
-        addRequest(new Request("My Request1", "GET"));
-        addRequest(new Request("My Request2", "POST"));
-        addRequest(new Request("My Request3", "PUT"));
-        addRequest(new Request("My Request4", "PATCH"));
-        addRequest(new Request("My Request5", "DELETE"));
-
-        addRequest(new Request("My Request1", "GET"));
-        addRequest(new Request("My Request2", "POST"));
-        addRequest(new Request("My Request3", "PUT"));
-        addRequest(new Request("My Request4", "PATCH"));
-        addRequest(new Request("My Request5", "DELETE"));
 
         add(logo, BorderLayout.NORTH);
     }
@@ -61,17 +33,70 @@ public class LeftPanel extends JPanel {
     }
 
     private void requestsListInit(){
+        JPanel panel = new JPanel(new BorderLayout(0, 5));
+        panel.setBackground(new Color(46, 47, 43));
+        panel.setBorder(BorderFactory.createEmptyBorder(8,0,0,0));
+        JButton newRequestB = new JButton(new ImageIcon("src/res/newRequest.png"));
+        newRequestB.setFocusable(false);
+        newRequestB.setToolTipText("New Request");
+        newRequestB.setBorder(BorderFactory.createEmptyBorder());
+        newRequestB.setBackground(new Color(46, 47, 43));
+        newRequestB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showNewRequestFrame();
+            }
+        });
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+        buttonPanel.setBackground(new Color(46, 47, 43));
+        buttonPanel.add(newRequestB);
+
         requestsListModel = new DefaultListModel<>();
         JList<Request> requestsList = new JList<>(requestsListModel);
         requestsList.setCellRenderer(new RequestRenderer());
         requestsList.setBackground(new Color(46, 47, 43));
         JScrollPane spRequestList = new JScrollPane(requestsList);
         spRequestList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        add(spRequestList, BorderLayout.CENTER);
+        panel.add(buttonPanel, BorderLayout.NORTH);
+        panel.add(spRequestList, BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
     }
 
     private void addRequest(Request request){
         requestsListModel.addElement(request);
+    }
+
+    private void showNewRequestFrame(){
+        JFrame frame = new JFrame("New Request");
+        frame.setSize(800,180);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setIconImage(new ImageIcon("src/res/Insomnia.png").getImage());
+        JPanel panel = new JPanel(new BorderLayout(0, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
+        frame.setContentPane(panel);
+
+        JLabel label = new JLabel("Name");
+        JTextField textField = new JTextField("My Request");
+        String[] methods = {"GET", "POST", "PUT", "PATCH", "DELETE"};
+        JComboBox<String> method = new JComboBox<>(methods);
+        method.setPreferredSize(new Dimension(method.getPreferredSize().width + 20, method.getPreferredSize().height));
+        JButton button = new JButton("Create");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addRequest(new Request(textField.getText(), (String) method.getSelectedItem()));
+                frame.dispose();
+            }
+        });
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(button);
+        panel.add(label, BorderLayout.NORTH);
+        panel.add(textField, BorderLayout.CENTER);
+        panel.add(method, BorderLayout.EAST);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        frame.setVisible(true);
     }
 
     private class RequestRenderer extends JLabel implements ListCellRenderer<Request> {

@@ -174,6 +174,8 @@ public class MiddlePanel extends JPanel {
 
             ImageIcon delIcon = new ImageIcon(this.getClass().getResource("res/delete.png"));
             JButton deleteB = new JButton(delIcon);
+            deleteB.setBackground(new Color(46, 47, 43));
+            deleteB.setBorder(BorderFactory.createEmptyBorder());
             deleteB.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
