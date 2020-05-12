@@ -1,12 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * this class represents right panel of the application that holds
+ * response details.
+ *
+ * @author Mohammad Salehi Vaziri
+ */
 public class RightPanel extends JPanel {
     private JPanel topPanel;
     private JTabbedPane tabs;
     private JPanel header;
     private JPanel preview;
 
+    /**
+     * Instantiates a new Right panel.
+     */
     public RightPanel() {
         super();
         setLayout(new BorderLayout());
@@ -18,7 +27,7 @@ public class RightPanel extends JPanel {
         add(tabs, BorderLayout.CENTER);
     }
 
-
+    //initializes top panel that holds three labels to show response status
     private void topPanelInit() {
         topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
@@ -29,6 +38,7 @@ public class RightPanel extends JPanel {
         topPanel.add(createSizeLabel(0));
     }
 
+    //initializes tabs that are header and preview
     private void tabsInit(){
         tabs = new JTabbedPane();
 
@@ -44,6 +54,7 @@ public class RightPanel extends JPanel {
         tabs.setForegroundAt(1, new Color(187, 187, 187));
     }
 
+    //creates the status label that consists of a code and message
     private JLabel createStatusLabel(int statusCode, String statusMessage) {
         JLabel statusLabel = new JLabel();
         if (statusMessage.equals("Error")) {
@@ -60,6 +71,7 @@ public class RightPanel extends JPanel {
         return statusLabel;
     }
 
+    //creates time label
     private JLabel createTimeLabel(double time) {
         JLabel statusLabel = new JLabel();
         statusLabel.setText("TIME " + time + " s");
@@ -71,6 +83,7 @@ public class RightPanel extends JPanel {
         return statusLabel;
     }
 
+    //creates size label
     private JLabel createSizeLabel(double size){
 
         JLabel statusLabel = new JLabel();
@@ -83,6 +96,8 @@ public class RightPanel extends JPanel {
         return statusLabel;
     }
 
+    //initializes header tab that has a number of name and values implemented by
+    //JTextArea and a copy button
     private void headerInit(){
         header = new JPanel();
         header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
@@ -100,6 +115,9 @@ public class RightPanel extends JPanel {
         header.add(button);
 
     }
+
+    //creating a new name and value and putting them in a panel to be added to
+    //header tab.
     private void addHeader(String key, String value){
 
         JPanel panel = new JPanel();

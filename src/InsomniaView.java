@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+/**
+ * it represents the main frame of the application that consists of
+ * a menu bar and three panels.
+ *
+ * @author Mohammad Salehi Vaziri
+ */
 public class InsomniaView extends JFrame {
 
     private JMenuBar menuBar;
@@ -12,15 +18,20 @@ public class InsomniaView extends JFrame {
     private LeftPanel leftPanel;
     private MiddlePanel middlePanel;
     private RightPanel rightPanel;
+    //to know if size of the frame is full screen or not
     private boolean isFullScreen;
+    //to show app must be hidden on system tray or not
     private boolean hideInSystemTray;
 
+    /**
+     * Instantiates a new Insomnia view.
+     */
     public InsomniaView() {
         super("Insomnia");
         initFrame();
     }
 
-
+    //initializes menu bar of the application and menu item's functionality
     private void MenuBarInit() {
         menuBar = new JMenuBar();
         JMenu applicationMenu = new JMenu("Application");
@@ -101,7 +112,8 @@ public class InsomniaView extends JFrame {
         setJMenuBar(menuBar);
     }
 
-
+    //forms the main frame of the application using JSplitPane and three panels
+    //from LeftPanel, MiddlePanel and RightPanel classes.
     private void initFrame(){
         setSize(1175, 600);
         setLocationRelativeTo(null);
@@ -125,6 +137,7 @@ public class InsomniaView extends JFrame {
         setVisible(true);
     }
 
+    //puts the program in system tray
     private void systemTray(){
         TrayIcon trayIcon = null;
         if (SystemTray.isSupported()){
@@ -161,6 +174,7 @@ public class InsomniaView extends JFrame {
         }
     }
 
+    //shows options frame with two check boxes.
     private void showOptionsFrame(){
         JFrame frame = new JFrame("Options");
         frame.setLocationRelativeTo(null);
@@ -184,17 +198,8 @@ public class InsomniaView extends JFrame {
                 hideInSystemTray = checkBox.isSelected();
             }
         });
-        JRadioButton radioButton1 = new JRadioButton("light theme");
-        JRadioButton radioButton2 = new JRadioButton("dark theme");
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(radioButton1);
-        buttonGroup.add(radioButton2);
-        JPanel panel = new JPanel();
-        panel.add(radioButton1);
-        panel.add(radioButton2);
         framePanel.add(checkBox1, BorderLayout.NORTH);
         framePanel.add(checkBox2, BorderLayout.CENTER);
-        framePanel.add(panel, BorderLayout.SOUTH);
         frame.setContentPane(framePanel);
         frame.setVisible(true);
     }

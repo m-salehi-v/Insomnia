@@ -1,15 +1,22 @@
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it represents the left panel of the application that contains insomnia logo
+ * and a button to add a new request and a list of saved requests.
+ *
+ * @author Mohammad Salehi vaziri
+ */
 public class LeftPanel extends JPanel {
     private JLabel logo;
+    //saved requests will be hold in this list
     private DefaultListModel<Request> requestsListModel;
 
+    /**
+     * Instantiates a new Left panel.
+     */
     public LeftPanel() {
         super();
         setBackground(new Color(46, 47, 43));
@@ -21,6 +28,7 @@ public class LeftPanel extends JPanel {
         add(logo, BorderLayout.NORTH);
     }
 
+    //initializes logo's JLabel
     private void logoInit() {
 
         logo = new JLabel("   Insomnia");
@@ -32,6 +40,7 @@ public class LeftPanel extends JPanel {
         logo.setPreferredSize(new Dimension(logo.getPreferredSize().width, logo.getPreferredSize().height + 18));
     }
 
+    //forms "add new request" button and saved requests list
     private void requestsListInit(){
         JPanel panel = new JPanel(new BorderLayout(0, 5));
         panel.setBackground(new Color(46, 47, 43));
@@ -62,10 +71,13 @@ public class LeftPanel extends JPanel {
         add(panel, BorderLayout.CENTER);
     }
 
+    //adds the given request to saved requests list
     private void addRequest(Request request){
         requestsListModel.addElement(request);
     }
 
+    //shows a frame to get a name and method and add a new saved request with
+    //the given name and method
     private void showNewRequestFrame(){
         JFrame frame = new JFrame("New Request");
         frame.setSize(800,180);
@@ -99,6 +111,7 @@ public class LeftPanel extends JPanel {
         frame.setVisible(true);
     }
 
+    //it shows each request as a JLabel
     private class RequestRenderer extends JLabel implements ListCellRenderer<Request> {
 
         public RequestRenderer() {
