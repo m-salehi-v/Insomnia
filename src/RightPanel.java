@@ -117,12 +117,14 @@ public class RightPanel extends JPanel {
         textArea1.setForeground(Color.GRAY);
         textArea1.setBackground(new Color(46, 47, 43));
         textArea1.setLineWrap(true);
+        textArea1.setEditable(false);
 
         JTextArea textArea2 = new JTextArea();
         textArea2.setText(value);
         textArea2.setForeground(Color.GRAY);
         textArea2.setBackground(new Color(46, 47, 43));
         textArea2.setLineWrap(true);
+        textArea2.setEditable(false);
 
         textAreas.add(textArea1);
         textAreas.add(Box.createRigidArea(new Dimension(20, 0)));
