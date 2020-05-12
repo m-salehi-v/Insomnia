@@ -13,6 +13,7 @@ public class InsomniaView extends JFrame {
     private MiddlePanel middlePanel;
     private RightPanel rightPanel;
     private boolean isFullScreen;
+    private boolean hideInSystemTray;
 
     public InsomniaView() {
         super("Insomnia");
@@ -26,11 +27,27 @@ public class InsomniaView extends JFrame {
         applicationMenu.setMnemonic('A');
         JMenuItem options = new JMenuItem("Options", 'O');
         options.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_COMMA, KeyEvent.CTRL_DOWN_MASK));
+        options.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showOptionsFrame();
+            }
+        });
         JMenuItem exit = new JMenuItem("Exit", 'E');
         exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
         applicationMenu.add(options);
         applicationMenu.add(exit);
-
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (hideInSystemTray) {
+                    setVisible(false);
+                    systemTray();
+                }
+                else
+                    System.exit(0);
+            }
+        });
         JMenu viewMenu = new JMenu("View");
         viewMenu.setMnemonic('V');
         JMenuItem toggleFullScreen = new JMenuItem("Toggle Full Screen", 'F');
@@ -98,5 +115,78 @@ public class InsomniaView extends JFrame {
 
         add(splitPane2, BorderLayout.CENTER);
         setVisible(true);
+    }
+
+    private void systemTray(){
+        TrayIcon trayIcon = null;
+        if (SystemTray.isSupported()){
+            SystemTray tray = SystemTray.getSystemTray();
+
+            Image image = Toolkit.getDefaultToolkit().getImage("src/res/insomnia.png");
+            PopupMenu popup = new PopupMenu();
+            ActionListener openActionHandler = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(true);
+                }
+            };
+            MenuItem open = new MenuItem("Open");
+            open.addActionListener(openActionHandler);
+            MenuItem exit = new MenuItem("Exit");
+            exit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            popup.add(open);
+            popup.add(exit);
+
+            trayIcon = new TrayIcon(image, "Insomnia", popup);
+            trayIcon.setImageAutoSize(true);
+            trayIcon.addActionListener(openActionHandler);
+            try {
+                tray.add(trayIcon);
+            } catch (AWTException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    private void showOptionsFrame(){
+        JFrame frame = new JFrame();
+        frame.setLocationRelativeTo(null);
+        frame.setSize(300,150);
+        frame.setResizable(false);
+
+        JPanel framePanel = new JPanel(new BorderLayout(10,10));
+        framePanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+        JCheckBox checkBox1 = new JCheckBox("Follow Redirect");
+        JCheckBox checkBox2 = new JCheckBox("Hide in System Tray");
+        if (hideInSystemTray)
+            checkBox2.setSelected(true);
+        else
+            checkBox2.setSelected(false);
+        checkBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JCheckBox checkBox = (JCheckBox) e.getSource();
+                hideInSystemTray = checkBox.isSelected();
+            }
+        });
+        JRadioButton radioButton1 = new JRadioButton("light theme");
+        JRadioButton radioButton2 = new JRadioButton("dark theme");
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(radioButton1);
+        buttonGroup.add(radioButton2);
+        JPanel panel = new JPanel();
+        panel.add(radioButton1);
+        panel.add(radioButton2);
+        framePanel.add(checkBox1, BorderLayout.NORTH);
+        framePanel.add(checkBox2, BorderLayout.CENTER);
+        framePanel.add(panel, BorderLayout.SOUTH);
+        frame.setContentPane(framePanel);
+        frame.setVisible(true);
     }
 }
