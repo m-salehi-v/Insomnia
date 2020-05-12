@@ -89,12 +89,16 @@ public class RightPanel extends JPanel {
         header.setBackground(new Color(46, 47, 43));
         header.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
+        JButton button = new JButton("Copy to Clipboard");
+
         addHeader("NAME", "VALUE");
         addHeader("Date", "Mon, 11 May 2020 19:24:00 GMT");
         addHeader("Alt-Svc" , "h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-Q050=\":443\";" +
                 " ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443" +
                 "\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"");
         addHeader("Set-Cookie", "1P_JAR=2020-05-11-19; expires=Wed, 10-Jun-2020 19:24:00 GMT; path=/; domain=.google.com; Secure");
+        header.add(button);
+
     }
     private void addHeader(String key, String value){
 
