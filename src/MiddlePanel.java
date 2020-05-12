@@ -11,6 +11,7 @@ public class MiddlePanel extends JPanel {
     private JPanel auth;
     private JPanel formData;
     private JPanel noBody;
+    private JPanel json;
 
     public MiddlePanel() {
         super();
@@ -78,6 +79,8 @@ public class MiddlePanel extends JPanel {
 
         noBodyInit();
 
+        jsonInit();
+
         tabs.add(noBody, "Body");
         tabs.add(auth, "Auth");
         tabs.add(queryScrollable, "Query");
@@ -107,6 +110,14 @@ public class MiddlePanel extends JPanel {
         label.setForeground(Color.GRAY);
         label.setHorizontalAlignment(JLabel.CENTER);
         noBody.add(label, BorderLayout.CENTER);
+    }
+
+    private void jsonInit(){
+        json = new JPanel(new BorderLayout());
+        JTextArea textArea = new JTextArea("...");
+        textArea.setLineWrap(true);
+        textArea.setBackground(new Color(46, 47, 43));
+        json.add(new JScrollPane(textArea), BorderLayout.CENTER);
     }
 
     private JPanel createItem(ArrayList<JPanel> items, int type, boolean newItem) { //0 for new 1 for header 2 for query
@@ -389,6 +400,16 @@ public class MiddlePanel extends JPanel {
                     formDataLabel.addMouseListener(new selectTabHandler());
                     tabs.setTabComponentAt(0, formDataLabel);
                     tabs.setComponentAt(0, new JScrollPane(formData));
+                    revalidate();
+                }
+            });
+            menuItem2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel jsonLabel = new JLabel("JSON");
+                    jsonLabel.addMouseListener(new selectTabHandler());
+                    tabs.setTabComponentAt(0, jsonLabel);
+                    tabs.setComponentAt(0, json);
                     revalidate();
                 }
             });
