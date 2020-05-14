@@ -118,7 +118,7 @@ public class InsomniaView extends JFrame {
         setSize(1175, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setIconImage(new ImageIcon("src/res/Insomnia.png").getImage());
+        setIconImage(new ImageIcon(this.getClass().getResource("res/Insomnia.png")).getImage());
 
         MenuBarInit();
 
@@ -143,7 +143,7 @@ public class InsomniaView extends JFrame {
         if (SystemTray.isSupported()){
             SystemTray tray = SystemTray.getSystemTray();
 
-            Image image = Toolkit.getDefaultToolkit().getImage("src/res/insomnia.png");
+            Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("res/insomnia.png"));
             PopupMenu popup = new PopupMenu();
             ActionListener openActionHandler = new ActionListener() {
                 @Override
@@ -180,7 +180,7 @@ public class InsomniaView extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setSize(300,150);
         frame.setResizable(false);
-        frame.setIconImage(new ImageIcon("src/res/Insomnia.png").getImage());
+        frame.setIconImage(new ImageIcon(this.getClass().getResource("res/Insomnia.png")).getImage());
 
         JPanel framePanel = new JPanel(new BorderLayout(10,10));
         framePanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));

@@ -45,7 +45,7 @@ public class LeftPanel extends JPanel {
         JPanel panel = new JPanel(new BorderLayout(0, 5));
         panel.setBackground(new Color(46, 47, 43));
         panel.setBorder(BorderFactory.createEmptyBorder(8,0,0,0));
-        JButton newRequestB = new JButton(new ImageIcon("src/res/newRequest.png"));
+        JButton newRequestB = new JButton(new ImageIcon(this.getClass().getResource("res/newRequest.png")));
         newRequestB.setFocusable(false);
         newRequestB.setToolTipText("New Request");
         newRequestB.setBorder(BorderFactory.createEmptyBorder());

@@ -160,11 +160,11 @@ public class MiddlePanel extends JPanel {
         ImageIcon headerIcon;
         JLabel label = new JLabel();
         if (newItem) {
-            headerIcon = new ImageIcon("src/res/settingIcon.png");
+            headerIcon = new ImageIcon(this.getClass().getResource("res/settingIcon.png"));
             label.addMouseListener(new deleteAllHandler(items, type));
         }
         else{
-            headerIcon = new ImageIcon("src/res/header.png");
+            headerIcon = new ImageIcon(this.getClass().getResource("res/header.png"));
         }
         label.setIcon(headerIcon);
         panel.add(label, BorderLayout.WEST);
