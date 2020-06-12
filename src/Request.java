@@ -31,6 +31,7 @@ public class Request implements Serializable{
     private String contentType;
     private String json;
     private CloseableHttpResponse response;
+    private double responseTime;
 
     public Request(String name, String method) throws IllegalArgumentException{
         this.name = name;
@@ -92,6 +93,14 @@ public class Request implements Serializable{
 
     public void setResponse(CloseableHttpResponse response) {
         this.response = response;
+    }
+
+    public void setResponseTime(double responseTime) {
+        this.responseTime = responseTime;
+    }
+
+    public double getResponseTime() {
+        return responseTime;
     }
 
     private void analyzeArgs(String[] args) throws IllegalArgumentException{

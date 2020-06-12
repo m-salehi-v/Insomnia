@@ -27,17 +27,30 @@ public class RightPanel extends JPanel {
         add(tabs, BorderLayout.CENTER);
     }
 
+    public JPanel getPreview() {
+        return preview;
+    }
+
     //initializes top panel that holds three labels to show response status
     private void topPanelInit() {
         topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
         topPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
 
-        topPanel.add(createStatusLabel(0, "Error"));
-        topPanel.add(createTimeLabel(0));
-        topPanel.add(createSizeLabel(0));
+        addStatusLine(0, "Error");
+        addTimeLabel(0);
+        addSizeLabel(0);
     }
-
+    public void addStatusLine(int code, String message){
+        topPanel.removeAll();
+        topPanel.add(createStatusLabel(code, message));
+    }
+    public void addTimeLabel(double time){
+        topPanel.add(createTimeLabel(time));
+    }
+    public void addSizeLabel(double size){
+        topPanel.add(createSizeLabel(size));
+    }
     //initializes tabs that are header and preview
     private void tabsInit(){
         tabs = new JTabbedPane();
@@ -45,6 +58,11 @@ public class RightPanel extends JPanel {
         headerInit();
 
         preview = new JPanel();
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setBackground(new Color(46, 47, 43));
+        textArea.setLineWrap(true);
+        preview.add(new JScrollPane(textArea));
         preview.setBackground(new Color(46, 47, 43));
 
         tabs.add(preview, "Preview");
@@ -106,19 +124,13 @@ public class RightPanel extends JPanel {
 
         JButton button = new JButton("Copy to Clipboard");
 
-        addHeader("NAME", "VALUE");
-        addHeader("Date", "Mon, 11 May 2020 19:24:00 GMT");
-        addHeader("Alt-Svc" , "h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-Q050=\":443\";" +
-                " ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443" +
-                "\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"");
-        addHeader("Set-Cookie", "1P_JAR=2020-05-11-19; expires=Wed, 10-Jun-2020 19:24:00 GMT; path=/; domain=.google.com; Secure");
         header.add(button);
 
     }
 
     //creating a new name and value and putting them in a panel to be added to
     //header tab.
-    private void addHeader(String key, String value){
+    public void addHeader(String key, String value){
 
         JPanel panel = new JPanel();
         panel.setBackground(new Color(46, 47, 43));

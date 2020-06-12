@@ -96,6 +96,13 @@ public class MiddlePanel extends JPanel {
         return data;
     }
 
+    public void setUrlText(String url){
+        urlField.setText(url);
+    }
+    public void setSelectedMethod(String methodName){
+        method.setSelectedItem(methodName);
+    }
+
     //initializes top panel with a combo box, a text field and a button
     private void topPanelInit() {
         topPanel = new JPanel();

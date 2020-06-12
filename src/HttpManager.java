@@ -81,7 +81,10 @@ public class HttpManager {
                 client = HttpClientBuilder.create().build();
             else
                 client = HttpClientBuilder.create().disableRedirectHandling().build();
+            long start = System.currentTimeMillis();
             CloseableHttpResponse response = client.execute(request);
+            long time = System.currentTimeMillis() - start;
+            currentRequest.setResponseTime(time/1000.0);
             if (currentRequest.isShowHelp())
                 printHelp();
             StringBuilder output = new StringBuilder();
