@@ -14,13 +14,15 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Request implements Serializable{
     private String name;
     private String url;
     private String method;
-    private HashMap<String, String> headers;
-    private HashMap<String, String> formData;
+    private LinkedHashMap<String, String> headers;
+    private LinkedHashMap<String, String> formData;
+    private LinkedHashMap<String, String> queries;
     private boolean showResponseHeaders;
     private boolean showHelp;
     private boolean followRedirect;
@@ -28,6 +30,7 @@ public class Request implements Serializable{
     private boolean saveRequest;
     private String contentType;
     private String json;
+    private CloseableHttpResponse response;
 
     public Request(String name, String method) throws IllegalArgumentException{
         this.name = name;
@@ -61,6 +64,34 @@ public class Request implements Serializable{
 
     public boolean isSaveRequest() {
         return saveRequest;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public LinkedHashMap<String, String> getHeaders() {
+        return headers;
+    }
+
+    public LinkedHashMap<String, String> getFormData() {
+        return formData;
+    }
+
+    public LinkedHashMap<String, String> getQueries() {
+        return queries;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public CloseableHttpResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(CloseableHttpResponse response) {
+        this.response = response;
     }
 
     private void analyzeArgs(String[] args) throws IllegalArgumentException{
@@ -157,8 +188,9 @@ public class Request implements Serializable{
 
     private void initWithDefaults(){
         url = "";
-        headers = new HashMap<>();
-        formData = new HashMap<>();
+        headers = new LinkedHashMap<>();
+        formData = new LinkedHashMap<>();
+        queries = new LinkedHashMap<>();
 //        method = "GET";
         showResponseHeaders = false;
         showHelp = false;
@@ -167,6 +199,7 @@ public class Request implements Serializable{
         saveRequest = false;
         contentType = "";
         json = "";
+        response = null;
     }
     private void analyzeHeaders(String input){
         String[] hs = input.split(";");

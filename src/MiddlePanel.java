@@ -12,6 +12,9 @@ import java.util.ArrayList;
  */
 public class MiddlePanel extends JPanel {
     private JPanel topPanel;
+    private JComboBox<String> method;
+    private JTextField urlField;
+    private JButton  send;
     private JTabbedPane tabs;
     private JPanel header;
     private JPanel query;
@@ -19,6 +22,9 @@ public class MiddlePanel extends JPanel {
     private JPanel formData;
     private JPanel noBody;
     private JPanel json;
+    private ArrayList<JPanel> headers;
+    private ArrayList<JPanel> queries;
+    private ArrayList<JPanel> data;
 
     /**
      * Instantiates a new Middle panel.
@@ -34,23 +40,79 @@ public class MiddlePanel extends JPanel {
         add(tabs, BorderLayout.CENTER);
     }
 
+    public JPanel getTopPanel() {
+        return topPanel;
+    }
+
+    public JTabbedPane getTabs() {
+        return tabs;
+    }
+
+    public JPanel getHeader() {
+        return header;
+    }
+
+    public JPanel getQuery() {
+        return query;
+    }
+
+    public JPanel getAuth() {
+        return auth;
+    }
+
+    public JPanel getFormData() {
+        return formData;
+    }
+
+    public JPanel getNoBody() {
+        return noBody;
+    }
+
+    public JPanel getJson() {
+        return json;
+    }
+
+    public JComboBox<String> getMethod() {
+        return method;
+    }
+
+    public JTextField getUrlField() {
+        return urlField;
+    }
+
+    public JButton getSend() {
+        return send;
+    }
+
+    public ArrayList<JPanel> getHeaders() {
+        return headers;
+    }
+
+    public ArrayList<JPanel> getQueries() {
+        return queries;
+    }
+
+    public ArrayList<JPanel> getData() {
+        return data;
+    }
+
     //initializes top panel with a combo box, a text field and a button
     private void topPanelInit() {
         topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout(0, 0));
 
         String[] methods = {"GET", "POST", "PUT", "PATCH", "DELETE"};
-        JComboBox<String> method = new JComboBox<>(methods);
+        method = new JComboBox<>(methods);
         method.setPreferredSize(new Dimension(method.getPreferredSize().width + 25, method.getPreferredSize().height));
 
-        JTextField urlField = new JTextField("Enter URL here");
+        urlField = new JTextField("Enter URL here");
         urlField.setFont(new Font("Arial", Font.PLAIN, 12));
         urlField.setForeground(new Color(187, 187, 187));
         urlField.addFocusListener(new PromptTextHandler());
 
 //        JPanel buttonsPanel = new JPanel();
 //        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-        JButton send = new JButton("Send");
+         send = new JButton("Send");
         send.setPreferredSize(new Dimension(send.getPreferredSize().width, send.getPreferredSize().height + 21));
 //        JButton save = new JButton("Save");
 //        save.setPreferredSize(new Dimension(save.getPreferredSize().width, save.getPreferredSize().height));
@@ -68,7 +130,7 @@ public class MiddlePanel extends JPanel {
 
         //this ArrayList holds panels that will be shown in header tab
         // each panel contains a header and a value
-        ArrayList<JPanel> headers = new ArrayList<>();
+        headers = new ArrayList<>();
         header = new JPanel();
         header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
         header.setBackground(new Color(46, 47, 43));
@@ -77,7 +139,7 @@ public class MiddlePanel extends JPanel {
 
         //this ArrayList holds panels that will be shown in query tab
         // each panel contains a name and a value
-        ArrayList<JPanel> queries = new ArrayList<>();
+        queries = new ArrayList<>();
         query = new JPanel();
         query.setLayout(new BoxLayout(query, BoxLayout.Y_AXIS));
         query.setBackground(new Color(46, 47, 43));
@@ -88,7 +150,7 @@ public class MiddlePanel extends JPanel {
 
         //this ArrayList holds panels that will be shown in form data tab
         // each panel contains a name and a value
-        ArrayList<JPanel> data = new ArrayList<>();
+        data = new ArrayList<>();
         formData = new JPanel();
         formData.setLayout(new BoxLayout(formData, BoxLayout.Y_AXIS));
         formData.setBackground(new Color(46, 47, 43));
@@ -145,7 +207,7 @@ public class MiddlePanel extends JPanel {
     //and a check box and a delete button. items ArrayList is the ArrayList that created item will be added to
     //type indicates the item belongs to which panel(0 for new 1 for header 2 for query 3 for form data)
     //new boolean shows if a "adding new" item must be created
-    private JPanel createItem(ArrayList<JPanel> items, int type, boolean newItem) {
+    public JPanel createItem(ArrayList<JPanel> items, int type, boolean newItem, String name, String value) {
 
         JPanel panel = new JPanel();
         panel.setBackground(new Color(46, 47, 43));
@@ -171,24 +233,21 @@ public class MiddlePanel extends JPanel {
 
         JTextField textField1 = new JTextField();
         if (newItem){
-            if (type == 1)
-                textField1 = new JTextField("New Header");
-            else
-                textField1 = new JTextField("New Name");
+            textField1 = new JTextField(name);
             textField1.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    addHeaderQueryForm(items, type);
+                    String tmpName;
+                    if(type == 1)
+                        tmpName = "Header";
+                    else
+                        tmpName = "Name";
+                    addHeaderQueryForm(items,createItem(items, type, false, tmpName, "Value"), type);
                 }
             });
         }
-        else if (type == 1) {
-            textField1.setText("Header");
-            textField1.addFocusListener(new PromptTextHandler());
-        } else {
-            textField1.setText("Name");
-            textField1.addFocusListener(new PromptTextHandler());
-        }
+        textField1.setText(name);
+        textField1.addFocusListener(new PromptTextHandler());
         textField1.setForeground(Color.GRAY);
         textField1.setMaximumSize(new Dimension(2000, 25));
         textField1.setBackground(new Color(46, 47, 43));
@@ -196,15 +255,20 @@ public class MiddlePanel extends JPanel {
 
         JTextField textField2 = new JTextField();
         if (newItem){
-            textField2.setText("New Value");
+            textField2.setText(value);
             textField2.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    addHeaderQueryForm(items, type);
+                    String tmpName;
+                    if(type == 1)
+                        tmpName = "Header";
+                    else
+                        tmpName = "Name";
+                    addHeaderQueryForm(items,createItem(items, type, false, tmpName, "Value"), type);
                 }
             });
         } else {
-            textField2.setText("Value");
+            textField2.setText(value);
             textField2.addFocusListener(new PromptTextHandler());
         }
         textField2.setForeground(Color.GRAY);
@@ -250,8 +314,8 @@ public class MiddlePanel extends JPanel {
 
     //adding a new item to items ArrayList that belongs to one of form data, query
     //or header tabs
-    private void addHeaderQueryForm(ArrayList<JPanel> items, int type) {
-            items.add(createItem(items, type, false));
+    public void addHeaderQueryForm(ArrayList<JPanel> items,JPanel item, int type) {
+            items.add(item);
             updateHeaderQueryForm(items, type);
             updateUI();
     }
@@ -259,17 +323,23 @@ public class MiddlePanel extends JPanel {
     //updates form data, query or header tab using elements in items ArrayList
     private void updateHeaderQueryForm(ArrayList<JPanel> items, int type) {
         JPanel target;
-        if (type == 1)
+        String name, value = "New Value";
+        if (type == 1) {
             target = header;
-        else if (type == 2)
+            name = "New Header";
+        }
+        else if (type == 2) {
             target = query;
-        else
+            name = "New Name";
+        }
+        else {
             target = formData;
-
+            name = "New Name";
+        }
         target.removeAll();
         for (JPanel jPanel : items)
             target.add(jPanel);
-        target.add(createItem(items,type, true));
+        target.add(createItem(items,type, true, name, value));
     }
 
     //initializes auth tab
@@ -350,9 +420,10 @@ public class MiddlePanel extends JPanel {
                     case "Value":
                         field.setText("Value");
                         break;
-                    default:
+                    case "Name":
                         field.setText("Name");
                         break;
+                    default:
                 }
             }
         }
@@ -423,6 +494,22 @@ public class MiddlePanel extends JPanel {
                         e.getX(), e.getY() + 5);
             }
         }
+    }
+
+    public void removeAllItems(){
+        if (headers.size() > 0) {
+            headers.subList(0, headers.size()).clear();
+        }
+        if (data.size() > 0) {
+            data.subList(0, data.size()).clear();
+        }
+        if (queries.size() > 0) {
+            queries.subList(0, queries.size()).clear();
+        }
+        updateHeaderQueryForm(headers, 1);
+        updateHeaderQueryForm(queries, 2);
+        updateHeaderQueryForm(data, 3);
+        updateUI();
     }
 
     //shows a popup menu when first tab is clicked to select another tab

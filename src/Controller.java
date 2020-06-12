@@ -1,36 +1,63 @@
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller {
     private InsomniaView view;
     private HttpManager model;
+    private RightPanel rightPanel;
+    private LeftPanel leftPanel;
+    private MiddlePanel middlePanel;
 
     public Controller(InsomniaView view, HttpManager model) {
         this.view = view;
         this.model = model;
 
-        view.getLeftPanel().requestsListModelInit(model.getRequests());
-        view.getLeftPanel().addCreateNewRequestHandler(new NewRequestHandler());
-
+        rightPanel = view.getRightPanel();
+        middlePanel = view.getMiddlePanel();
+        leftPanel = view.getLeftPanel();
+        leftPanel.requestsListModelInit(model.getRequests());
+        leftPanel.addCreateNewRequestHandler(new NewRequestHandler());
+        leftPanel.addListSelectionHandler(new RequestsListSelectionHandler());
     }
 
     private class RequestsListSelectionHandler implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {
-
+            JList<Request> requestJList = (JList<Request>) e.getSource();
+            Request selectedRequest = requestJList.getSelectedValue();
+            middlePanel.getMethod().setSelectedItem(selectedRequest.getMethod());
+            middlePanel.getUrlField().setText(selectedRequest.getUrl());
+            middlePanel.removeAllItems();
+            for (String key: selectedRequest.getHeaders().keySet()){
+                JPanel item = middlePanel.createItem(middlePanel.getHeaders(), 1, false, key, selectedRequest.getHeaders().get(key));
+                middlePanel.addHeaderQueryForm(middlePanel.getHeaders(), item, 1);
+            }
+            for (String name: selectedRequest.getFormData().keySet()){
+                JPanel item = middlePanel.createItem(middlePanel.getData(), 3, false, name, selectedRequest.getFormData().get(name));
+                middlePanel.addHeaderQueryForm(middlePanel.getData(), item, 3);
+            }
+            for (String name: selectedRequest.getQueries().keySet()){
+                JPanel item = middlePanel.createItem(middlePanel.getQueries(), 2, false, name, selectedRequest.getQueries().get(name));
+                middlePanel.addHeaderQueryForm(middlePanel.getQueries(), item, 2);
+            }
+            if (selectedRequest.getJson().length() != 0){
+                ((JTextArea)((JScrollPane)middlePanel.getJson().getComponent(0)).getViewport().getView()).setText(selectedRequest.getJson());
+            }
         }
     }
 
     private class NewRequestHandler implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            Request request = new Request(view.getLeftPanel().getNewRequestNameTextField().getText(),
-                    (String) view.getLeftPanel().getNewRequestMethodsComboBox().getSelectedItem());
+            Request request = new Request(leftPanel.getNewRequestNameTextField().getText(),
+                    (String) leftPanel.getNewRequestMethodsComboBox().getSelectedItem());
             model.setCurrentRequest(request);
             model.saveRequest(request);
-            view.getLeftPanel().addRequest(request);
+            leftPanel.addRequest(request);
 
         }
     }

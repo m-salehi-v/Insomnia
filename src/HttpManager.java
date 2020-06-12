@@ -103,6 +103,7 @@ public class HttpManager {
                 System.out.println("response saved to " + file.getAbsolutePath());
             }
             System.out.println(output.toString());
+            currentRequest.setResponse(response);
         } catch (IOException | ParseException e){
             System.err.println(e.getMessage());
         }
