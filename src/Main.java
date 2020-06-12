@@ -25,6 +25,9 @@ public class Main {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
         InsomniaView insomniaView = new InsomniaView();
+        HttpManager manager = new HttpManager();
+        Controller controller = new Controller(insomniaView, manager);
+        insomniaView.setVisible(true);
 
     }
 

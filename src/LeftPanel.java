@@ -1,7 +1,9 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * it represents the left panel of the application that contains insomnia logo
@@ -13,6 +15,10 @@ public class LeftPanel extends JPanel {
     private JLabel logo;
     //saved requests will be hold in this list
     private DefaultListModel<Request> requestsListModel;
+    private JList<Request> requestsList;
+    private JComboBox<String> newRequestMethodsComboBox;
+    private JTextField newRequestNameTextField;
+    private JButton createNewRequestButton;
 
     /**
      * Instantiates a new Left panel.
@@ -22,10 +28,35 @@ public class LeftPanel extends JPanel {
         setBackground(new Color(46, 47, 43));
         setLayout(new BorderLayout());
 
+        requestsListModel = new DefaultListModel<>();
+        createNewRequestButton = new JButton("Create");
         logoInit();
         requestsListInit();
 
         add(logo, BorderLayout.NORTH);
+    }
+
+    public JList<Request> getRequestsList() {
+        return requestsList;
+    }
+
+    public JComboBox<String> getNewRequestMethodsComboBox() {
+        return newRequestMethodsComboBox;
+    }
+
+    public JTextField getNewRequestNameTextField() {
+        return newRequestNameTextField;
+    }
+
+    public JButton getCreateNewRequestButton() {
+        return createNewRequestButton;
+    }
+
+    public void requestsListModelInit(ArrayList<Request> requests){
+        for (Request request :requests)
+            requestsListModel.addElement(request);
+        revalidate();
+        repaint();
     }
 
     //initializes logo's JLabel
@@ -60,8 +91,7 @@ public class LeftPanel extends JPanel {
         buttonPanel.setBackground(new Color(46, 47, 43));
         buttonPanel.add(newRequestB);
 
-        requestsListModel = new DefaultListModel<>();
-        JList<Request> requestsList = new JList<>(requestsListModel);
+        requestsList = new JList<>(requestsListModel);
         requestsList.setCellRenderer(new RequestRenderer());
         requestsList.setBackground(new Color(46, 47, 43));
         JScrollPane spRequestList = new JScrollPane(requestsList);
@@ -72,7 +102,7 @@ public class LeftPanel extends JPanel {
     }
 
     //adds the given request to saved requests list
-    private void addRequest(Request request){
+    public void addRequest(Request request){
         requestsListModel.addElement(request);
     }
 
@@ -89,28 +119,34 @@ public class LeftPanel extends JPanel {
         frame.setContentPane(panel);
 
         JLabel label = new JLabel("Name");
-        JTextField textField = new JTextField("My Request");
+        newRequestNameTextField = new JTextField("My Request");
         String[] methods = {"GET", "POST", "PUT", "PATCH", "DELETE"};
-        JComboBox<String> method = new JComboBox<>(methods);
-        method.setPreferredSize(new Dimension(method.getPreferredSize().width + 20, method.getPreferredSize().height));
-        JButton button = new JButton("Create");
-        button.addActionListener(new ActionListener() {
+        newRequestMethodsComboBox = new JComboBox<>(methods);
+        newRequestMethodsComboBox.setPreferredSize(new Dimension(newRequestMethodsComboBox.getPreferredSize().width + 20, newRequestMethodsComboBox.getPreferredSize().height));
+//        createNewRequestButton = new JButton("Create");
+        createNewRequestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addRequest(new Request(textField.getText(), (String) method.getSelectedItem()));
+//                addRequest(new Request(newRequestName.getText(), (String) newRequestMethods.getSelectedItem()));
                 frame.dispose();
             }
         });
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.add(button);
+        buttonPanel.add(createNewRequestButton);
         panel.add(label, BorderLayout.NORTH);
-        panel.add(textField, BorderLayout.CENTER);
-        panel.add(method, BorderLayout.EAST);
+        panel.add(newRequestNameTextField, BorderLayout.CENTER);
+        panel.add(newRequestMethodsComboBox, BorderLayout.EAST);
         panel.add(buttonPanel, BorderLayout.SOUTH);
-
         frame.setVisible(true);
     }
 
+    public void addListSelectionHandler(ListSelectionListener listener){
+        requestsList.addListSelectionListener(listener);
+    }
+
+    public void addCreateNewRequestHandler(ActionListener listener){
+        createNewRequestButton.addActionListener(listener);
+    }
     //it shows each request as a JLabel
     private class RequestRenderer extends JLabel implements ListCellRenderer<Request> {
 
@@ -120,32 +156,32 @@ public class LeftPanel extends JPanel {
         }
         @Override
         public Component getListCellRendererComponent(JList<? extends Request> list, Request value, int index, boolean isSelected, boolean cellHasFocus) {
-            String type = value.getType();
-            switch (type) {
+            String method = value.getMethod();
+            switch (method) {
                 case "GET":
-                    type = "<font style=\"color : rgb(171, 158, 221)\">&ensp; GET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    method = "<font style=\"color : rgb(171, 158, 221)\">&ensp; GET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 case "POST":
-                    type = "<font style=\"color : rgb(132, 186, 77)\">&ensp; POST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    method = "<font style=\"color : rgb(132, 186, 77)\">&ensp; POST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 case "PUT":
-                    type = "<font style=\"color : rgb(223, 160, 81)\">&ensp; PUT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    method = "<font style=\"color : rgb(223, 160, 81)\">&ensp; PUT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 case "PATCH":
-                    type = "<font style=\"color : rgb(193, 174, 61)\">&ensp; PTCH &nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    method = "<font style=\"color : rgb(193, 174, 61)\">&ensp; PTCH &nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
                 default:
-                    type = "<font style=\"color : rgb(226, 139, 138)\">&ensp; DEL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+                    method = "<font style=\"color : rgb(226, 139, 138)\">&ensp; DEL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
                     break;
             }
 
             if (isSelected){
                 setBackground(new Color(55, 56, 52));
-                setText("<html>" + type + "<font style=\"color : rgb(255, 255, 255)\">" + value.getName() + "</font></html>");
+                setText("<html>" + method + "<font style=\"color : rgb(255, 255, 255)\">" + value.getName() + "</font></html>");
             }
             else {
                 setBackground(new Color(46, 47, 43));
-                setText("<html>" + type + "<font style=\"color : rgb(166, 163, 161)\">" + value.getName() + "</font></html>");
+                setText("<html>" + method + "<font style=\"color : rgb(166, 163, 161)\">" + value.getName() + "</font></html>");
             }
             setOpaque(true);
 

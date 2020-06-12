@@ -442,6 +442,7 @@ public class MiddlePanel extends JPanel {
                     formDataLabel.addMouseListener(new selectTabHandler());
                     tabs.setTabComponentAt(0, formDataLabel);
                     tabs.setComponentAt(0, new JScrollPane(formData));
+                    tabs.setSelectedIndex(0);
                     revalidate();
                 }
             });
@@ -452,6 +453,7 @@ public class MiddlePanel extends JPanel {
                     jsonLabel.addMouseListener(new selectTabHandler());
                     tabs.setTabComponentAt(0, jsonLabel);
                     tabs.setComponentAt(0, json);
+                    tabs.setSelectedIndex(0);
                     revalidate();
                 }
             });
@@ -462,6 +464,7 @@ public class MiddlePanel extends JPanel {
                     noBodyLabel.addMouseListener(new selectTabHandler());
                     tabs.setTabComponentAt(0, noBodyLabel);
                     tabs.setComponentAt(0, noBody);
+                    tabs.setSelectedIndex(0);
                     revalidate();
                 }
             });

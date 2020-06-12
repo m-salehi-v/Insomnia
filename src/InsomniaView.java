@@ -31,6 +31,18 @@ public class InsomniaView extends JFrame {
         initFrame();
     }
 
+    public LeftPanel getLeftPanel() {
+        return leftPanel;
+    }
+
+    public MiddlePanel getMiddlePanel() {
+        return middlePanel;
+    }
+
+    public RightPanel getRightPanel() {
+        return rightPanel;
+    }
+
     //initializes menu bar of the application and menu item's functionality
     private void MenuBarInit() {
         menuBar = new JMenuBar();
@@ -134,7 +146,7 @@ public class InsomniaView extends JFrame {
         splitPane2.setDividerSize(2);
 
         add(splitPane2, BorderLayout.CENTER);
-        setVisible(true);
+//        setVisible(true);
     }
 
     //puts the program in system tray
