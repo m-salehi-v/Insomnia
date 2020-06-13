@@ -66,12 +66,27 @@ public class Controller {
             JPanel item = middlePanel.createItem(middlePanel.getHeaders(), 1, false, key, selectedRequest.getHeaders().get(key));
             middlePanel.addHeaderQueryForm(middlePanel.getHeaders(), item, 1);
         }
+        for (String key : selectedRequest.getUncheckedHeaders().keySet()) {
+            JPanel item = middlePanel.createItem(middlePanel.getHeaders(), 1, false, key, selectedRequest.getUncheckedHeaders().get(key));
+            ((JCheckBox) ((JPanel) item.getComponent(2)).getComponent(0)).setSelected(false);
+            middlePanel.addHeaderQueryForm(middlePanel.getHeaders(), item, 1);
+        }
         for (String name : selectedRequest.getFormData().keySet()) {
             JPanel item = middlePanel.createItem(middlePanel.getData(), 3, false, name, selectedRequest.getFormData().get(name));
             middlePanel.addHeaderQueryForm(middlePanel.getData(), item, 3);
         }
+        for (String key : selectedRequest.getUncheckedFormData().keySet()) {
+            JPanel item = middlePanel.createItem(middlePanel.getHeaders(), 3, false, key, selectedRequest.getUncheckedFormData().get(key));
+            ((JCheckBox) ((JPanel) item.getComponent(2)).getComponent(0)).setSelected(false);
+            middlePanel.addHeaderQueryForm(middlePanel.getData(), item, 3);
+        }
         for (String name : selectedRequest.getQueries().keySet()) {
             JPanel item = middlePanel.createItem(middlePanel.getQueries(), 2, false, name, selectedRequest.getQueries().get(name));
+            middlePanel.addHeaderQueryForm(middlePanel.getQueries(), item, 2);
+        }
+        for (String name : selectedRequest.getUncheckedQueries().keySet()) {
+            JPanel item = middlePanel.createItem(middlePanel.getQueries(), 2, false, name, selectedRequest.getUncheckedQueries().get(name));
+            ((JCheckBox) ((JPanel) item.getComponent(2)).getComponent(0)).setSelected(false);
             middlePanel.addHeaderQueryForm(middlePanel.getQueries(), item, 2);
         }
         if (selectedRequest.getJson().length() != 0) {

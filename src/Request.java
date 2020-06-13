@@ -15,6 +15,9 @@ public class Request implements Serializable{
     private LinkedHashMap<String, String> headers;
     private LinkedHashMap<String, String> formData;
     private LinkedHashMap<String, String> queries;
+    private LinkedHashMap<String, String> uncheckedHeaders;
+    private LinkedHashMap<String, String> uncheckedFormData;
+    private LinkedHashMap<String, String> uncheckedQueries;
     private boolean showResponseHeaders;
     private boolean followRedirect;
     private String contentType;
@@ -145,11 +148,26 @@ public class Request implements Serializable{
         this.json = json;
     }
 
+    public LinkedHashMap<String, String> getUncheckedHeaders() {
+        return uncheckedHeaders;
+    }
+
+    public LinkedHashMap<String, String> getUncheckedFormData() {
+        return uncheckedFormData;
+    }
+
+    public LinkedHashMap<String, String> getUncheckedQueries() {
+        return uncheckedQueries;
+    }
+
     private void initWithDefaults(){
         url = "";
         headers = new LinkedHashMap<>();
         formData = new LinkedHashMap<>();
         queries = new LinkedHashMap<>();
+        uncheckedFormData = new LinkedHashMap<>();
+        uncheckedHeaders = new LinkedHashMap<>();
+        uncheckedQueries = new LinkedHashMap<>();
         showResponseHeaders = true;
         followRedirect = false;
         contentType = "";

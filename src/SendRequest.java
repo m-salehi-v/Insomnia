@@ -26,28 +26,33 @@ public class SendRequest extends SwingWorker {
             selectedRequest.setUrl(middlePanel.getUrlField().getText());
             selectedRequest.setMethod((String) middlePanel.getMethod().getSelectedItem());
             selectedRequest.getHeaders().clear();
+            selectedRequest.getUncheckedHeaders().clear();
             for (JPanel headersPanel : middlePanel.getHeaders()) {
                 JCheckBox checkBox = (JCheckBox) ((JPanel) headersPanel.getComponent(2)).getComponent(0);
                 JTextField nameField = (JTextField) ((JPanel) headersPanel.getComponent(1)).getComponent(0);
                 JTextField valueField = (JTextField) ((JPanel) headersPanel.getComponent(1)).getComponent(2);
-                if (checkBox.isEnabled()) {
+                if (checkBox.isSelected()) {
                     if (!nameField.getText().equals("Header") || !valueField.getText().equals("Value")) {
                         selectedRequest.getHeaders().put(nameField.getText(), valueField.getText());
                     }
-                }
+                }else
+                    selectedRequest.getUncheckedHeaders().put(nameField.getText(), valueField.getText());
             }
             String selectedMessageBody = ((JLabel) middlePanel.getTabs().getTabComponentAt(0)).getText();
             selectedRequest.getFormData().clear();
+            selectedRequest.getUncheckedFormData().clear();
             if (selectedMessageBody.equals("Form Data")) {
                 for (JPanel formDataPanel : middlePanel.getData()) {
                     JCheckBox checkBox = (JCheckBox) ((JPanel) formDataPanel.getComponent(2)).getComponent(0);
                     JTextField nameField = (JTextField) ((JPanel) formDataPanel.getComponent(1)).getComponent(0);
                     JTextField valueField = (JTextField) ((JPanel) formDataPanel.getComponent(1)).getComponent(2);
-                    if (checkBox.isEnabled()) {
+                    if (checkBox.isSelected()) {
                         if (!nameField.getText().equals("Name") || !valueField.getText().equals("Value")) {
                             selectedRequest.getFormData().put(nameField.getText(), valueField.getText());
+                            selectedRequest.setContentType("multipart/form-data");
                         }
-                    }
+                    }else
+                        selectedRequest.getUncheckedFormData().put(nameField.getText(), valueField.getText());
                 }
             } else if (selectedMessageBody.equals("JSON")) {
                 selectedRequest.setJson(((JTextArea) ((JScrollPane) middlePanel.getJson().getComponent(0)).getViewport().getView()).getText());
@@ -59,15 +64,17 @@ public class SendRequest extends SwingWorker {
                 }
             }
             selectedRequest.getQueries().clear();
+            selectedRequest.getUncheckedQueries().clear();
             for (JPanel queryPanel : middlePanel.getQueries()) {
                 JCheckBox checkBox = (JCheckBox) ((JPanel) queryPanel.getComponent(2)).getComponent(0);
                 JTextField nameField = (JTextField) ((JPanel) queryPanel.getComponent(1)).getComponent(0);
                 JTextField valueField = (JTextField) ((JPanel) queryPanel.getComponent(1)).getComponent(2);
-                if (checkBox.isEnabled()) {
+                if (checkBox.isSelected()) {
                     if (!nameField.getText().equals("Name") || !valueField.getText().equals("Value")) {
                         selectedRequest.getQueries().put(nameField.getText(), valueField.getText());
                     }
-                }
+                }else
+                    selectedRequest.getUncheckedQueries().put(nameField.getText(), valueField.getText());
             }
             if (view.isFollowRedirect())
                 selectedRequest.setFollowRedirect(true);

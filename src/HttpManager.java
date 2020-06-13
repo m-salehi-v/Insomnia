@@ -57,8 +57,11 @@ public class HttpManager {
                 .append(response.getReasonPhrase()).append("\n");
         for (Header header : response.getHeaders())
             output.append(header).append("\n");
-
-        String responseBody = EntityUtils.toString(response.getEntity());
+        String responseBody;
+        if(response.getEntity() == null)
+            responseBody = "";
+        else
+            responseBody = EntityUtils.toString(response.getEntity());
         currentRequest.setResponseBody(responseBody);
         output.append("\n").append(responseBody);
         System.out.println(output.toString());
