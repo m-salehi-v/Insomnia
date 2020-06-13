@@ -83,9 +83,18 @@ public class RightPanel extends JPanel {
         if (statusMessage.equals("Error")) {
             statusLabel.setText("Error");
             statusLabel.setBackground(new Color(199, 40, 40));
-        } else {
+        } else if (statusCode/100 == 2){
             statusLabel.setText(statusCode + " " + statusMessage);
             statusLabel.setBackground(new Color(55, 171, 46));
+        } else if (statusCode/100 == 3){
+            statusLabel.setText(statusCode + " " + statusMessage);
+            statusLabel.setBackground(new Color(105, 94, 184));
+        }else if (statusCode/100 == 4){
+            statusLabel.setText(statusCode + " " + statusMessage);
+            statusLabel.setBackground(new Color(219, 151, 13));
+        }else if (statusCode/100 == 5){
+            statusLabel.setText(statusCode + " " + statusMessage);
+            statusLabel.setBackground(new Color(227, 77, 77));
         }
         statusLabel.setForeground(Color.WHITE);
         statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));

@@ -2,29 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aeda6928-7fdc-4358-a54b-0b37125cdea4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_20200518.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Insomnia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Insomnia.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved Requests/requests.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Saved Requests/requests.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller$NewRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller$NewRequestHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller$RequestsListSelectionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller$RequestsListSelectionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller$SendRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller$SendRequestHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$CheckBoxActionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$CheckBoxActionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Request.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/RightPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/RightPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HttpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HttpManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InsomniaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InsomniaView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MiddlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiddlePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RightPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RightPanel.java" afterDir="false" />
     </list>
@@ -73,7 +65,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../InsomniaConsole" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../json-20200518.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -111,7 +103,7 @@
       <workItem from="1591890086571" duration="1183000" />
       <workItem from="1591948609055" duration="19263000" />
       <workItem from="1591993389825" duration="1765000" />
-      <workItem from="1591995603450" duration="24550000" />
+      <workItem from="1591995603450" duration="29615000" />
     </task>
     <servers />
   </component>
@@ -136,34 +128,34 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1592018368791" />
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1592014985865">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1592025758881">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592014985865" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592025758881" />
     <state x="101" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591978044902">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="101" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1591978044902" />
-    <state x="389" y="105" key="FileChooserDialogImpl" timestamp="1591981848992">
+    <state x="389" y="105" key="FileChooserDialogImpl" timestamp="1592025120657">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591981848992" />
-    <state width="1323" height="206" key="GridCell.Tab.0.bottom" timestamp="1592020875438">
+    <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592025120657" />
+    <state width="1323" height="108" key="GridCell.Tab.0.bottom" timestamp="1592026137768">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="206" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592020875438" />
-    <state width="1323" height="206" key="GridCell.Tab.0.center" timestamp="1592020875438">
+    <state width="1323" height="108" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592026137768" />
+    <state width="1323" height="108" key="GridCell.Tab.0.center" timestamp="1592026137768">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="206" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592020875438" />
-    <state width="1323" height="206" key="GridCell.Tab.0.left" timestamp="1592020875437">
+    <state width="1323" height="108" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592026137768" />
+    <state width="1323" height="108" key="GridCell.Tab.0.left" timestamp="1592026137768">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="206" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592020875437" />
-    <state width="1323" height="206" key="GridCell.Tab.0.right" timestamp="1592020875438">
+    <state width="1323" height="108" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592026137768" />
+    <state width="1323" height="108" key="GridCell.Tab.0.right" timestamp="1592026137768">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="206" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592020875438" />
+    <state width="1323" height="108" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592026137768" />
     <state width="1323" height="215" key="GridCell.Tab.1.bottom" timestamp="1592014880101">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -180,10 +172,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1592014880101" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1591993637494">
+    <state x="163" y="0" key="SettingsEditor" timestamp="1592025126271">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1591993637494" />
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592025126271" />
     <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1591995601372">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -192,21 +184,25 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="330" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1592015389406" />
+    <state x="413" y="130" key="extract.method.dialog" timestamp="1592022747655">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="130" key="extract.method.dialog/0.0.1366.728@0.0.1366.728" timestamp="1592022747655" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1592017987429">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1592017987429" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592011922738">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592025913181">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1592011922738" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1592025913181" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>26</line>
+          <line>28</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

@@ -16,10 +16,7 @@ public class Request implements Serializable{
     private LinkedHashMap<String, String> formData;
     private LinkedHashMap<String, String> queries;
     private boolean showResponseHeaders;
-    private boolean showHelp;
     private boolean followRedirect;
-    private String outputName;
-    private boolean saveRequest;
     private String contentType;
     private String json;
     private org.apache.hc.core5.http.Header[] responseHeaders;
@@ -92,20 +89,8 @@ public class Request implements Serializable{
         return showResponseHeaders;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
-    }
-
     public boolean isFollowRedirect() {
         return followRedirect;
-    }
-
-    public String getOutputName() {
-        return outputName;
-    }
-
-    public boolean isSaveRequest() {
-        return saveRequest;
     }
 
     public String getUrl() {
@@ -160,153 +145,17 @@ public class Request implements Serializable{
         this.json = json;
     }
 
-//    private void analyzeArgs(String[] args) throws IllegalArgumentException{
-//        url = args[0];
-//        for (int i = 1; i < args.length; i++){
-//            if (args[i].startsWith("-")){
-//                String s = args[i].substring(1);
-//                switch (s) {
-//                    case "M":
-//                    case "-method":
-//                        if ((i + 1) < args.length && !args[i + 1].startsWith("-"))
-//                            method = args[i + 1];
-//                        else
-//                            method = "GET";
-//                        break;
-//                    case "i":
-//                        showResponseHeaders = true;
-//                        break;
-//                    case "h":
-//                    case "-help":
-//                        showHelp = true;
-//                        break;
-//                    case "f":
-//                        followRedirect = true;
-//                        break;
-//                    case "O":
-//                    case "-output":
-//                        if ((i + 1) < args.length && !args[i + 1].startsWith("-"))
-//                            outputName = args[i + 1];
-//                        else {
-//                            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss");
-//                            outputName = "output_" + LocalDateTime.now().format(dateFormat);
-//                        }
-//                        break;
-//                    case "H":
-//                    case "-headers":
-//                        if ((i + 1) < args.length && !args[i + 1].startsWith("-"))
-//                            analyzeHeaders(args[i+1]);
-////                        else
-////                            throw new IllegalArgumentException("header requires parameter");
-//                        break;
-//                    case "S":
-//                    case "-save":
-//                        saveRequest = true;
-//                        break;
-//                    case "d":
-//                    case "-data":
-//                        if (contentType.length() == 0) {
-//                            if ((i + 1) < args.length && !args[i + 1].startsWith("-")) {
-//                                analyzeData(args[i + 1]);
-//                                contentType = "multipart/form-data";
-//                            }
-////                            else
-////                                throw new IllegalArgumentException("--data(-d) requires parameter");
-//                        } else
-//                            throw new IllegalArgumentException("you can only use one type of message body");
-//                        break;
-//                    case "-upload":
-//                        if(contentType.length() == 0) {
-//                            if ((i + 1) < args.length && !args[i + 1].startsWith("-")) {
-//                                formData.put("file", args[i + 1]);
-//                                contentType = "application/octet-stream";
-//                            }
-////                            else
-////                                throw new IllegalArgumentException("--upload requires parameter");
-//                        } else
-//                            throw new IllegalArgumentException("you can only use one type of message body");
-//                        break;
-//                    case "-urlencoded":
-//                        if (contentType.length() == 0) {
-//                            if ((i + 1) < args.length && !args[i + 1].startsWith("-")) {
-//                                analyzeData(args[i + 1]);
-//                                contentType = "application/x-www-form-urlencoded";
-//                            }
-////                            else {
-////                                throw new IllegalArgumentException("--urlencoded requires parameter");
-////                            }
-//                        }else
-//                            throw new IllegalArgumentException("you can only use one type of message body");
-//                        break;
-//                    case "json":
-//                        if (contentType.length() == 0) {
-//                            if ((i + 1) < args.length && !args[i + 1].startsWith("-")) {
-//                                analyzeJson(args[i + 1]);
-//                                contentType = "application/json";
-//                            }
-////                            else {
-////                                throw new IllegalArgumentException("-json requires parameter");
-////                            }
-//                        }else
-//                            throw new IllegalArgumentException("you can only use one type of message body");
-//                        break;
-//                    default:
-//                        throw new IllegalArgumentException("This argument is invalid -> " + method);
-//                }
-//            }
-//        }
-//    }
-
     private void initWithDefaults(){
         url = "";
         headers = new LinkedHashMap<>();
         formData = new LinkedHashMap<>();
         queries = new LinkedHashMap<>();
         showResponseHeaders = true;
-        showHelp = false;
         followRedirect = false;
-        outputName = "";
-        saveRequest = false;
         contentType = "";
         json = "";
         responseHeaders = null;
     }
-//    private void analyzeHeaders(String input){
-//        String[] hs = input.split(";");
-//        for (String header: hs){
-//            String[] keyAndValue = header.split(":", 2);
-//            if (keyAndValue.length == 1)
-//                headers.put(keyAndValue[0], "");
-//            else
-//                headers.put(keyAndValue[0], keyAndValue[1]);
-//        }
-//    }
-//    private void analyzeData(String input){
-//        String[] d = input.split("&");
-//        for (String data: d){
-//            String[] nameAndValue = data.split("=", 2);
-//            if (nameAndValue.length == 2)
-//                formData.put(nameAndValue[0], nameAndValue[1]);
-//        }
-//    }
-//
-//    private void analyzeJson(String input){
-//        input = input.substring(1, input.length() - 2);
-//        String[] d = input.split(",");
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("{");
-//        for (int i = 0; i < d.length; i++){
-//            String[] nameAndValue = d[i].split(":", 2);
-//            if (nameAndValue.length == 2){
-//                stringBuilder.append("\"").append(nameAndValue[0]).append("\"")
-//                        .append(":").append("\"").append(nameAndValue[1]).append("\"");
-//                if (i != d.length - 1)
-//                    stringBuilder.append(",");
-//            }
-//        }
-//        stringBuilder.append("}");
-//        json = stringBuilder.toString();
-//    }
 
     public HttpUriRequestBase build() throws URISyntaxException {
         HttpUriRequestBase request = null;

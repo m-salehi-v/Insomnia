@@ -1,4 +1,3 @@
-import org.apache.hc.client5.http.HttpHostConnectException;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -6,6 +5,7 @@ import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.ProtocolException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,10 +19,6 @@ public class HttpManager {
         requestsInit();
     }
 
-    public Request getCurrentRequest() {
-        return currentRequest;
-    }
-
     public ArrayList<Request> getRequests() {
         return requests;
     }
@@ -32,70 +28,61 @@ public class HttpManager {
     }
 
 
-    private void requestsInit(){
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("Saved Requests/requests.bin")))){
-            requests = (ArrayList)ois.readObject();
-        } catch (EOFException e){
-        } catch (IOException | ClassNotFoundException e){
+    private void requestsInit() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("Saved Requests/requests.bin")))) {
+            requests = (ArrayList) ois.readObject();
+        } catch (EOFException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
-    public void requestProcessing(HttpUriRequestBase request) throws IOException, ProtocolException, HttpHostConnectException {
+
+    public void requestProcessing(HttpUriRequestBase request) throws IOException, ProtocolException {
 
 
-            CloseableHttpClient client;
-            if (currentRequest.isFollowRedirect())
-                client = HttpClientBuilder.create().build();
-            else
-                client = HttpClientBuilder.create().disableRedirectHandling().build();
-            long start = System.currentTimeMillis();
-            CloseableHttpResponse response = client.execute(request);
-            long time = System.currentTimeMillis() - start;
-            currentRequest.setHaveResponse(true);
-            currentRequest.setResponseTime(time/1000.0);
-            if (currentRequest.isShowHelp())
-                printHelp();
-            StringBuilder output = new StringBuilder();
-            output.append(response.getVersion()).append(" ")
-                    .append(response.getCode()).append(" ")
-                    .append(response.getReasonPhrase()).append("\n");
-            if (currentRequest.isShowResponseHeaders()) {
-                for (Header header : response.getHeaders())
-                    output.append(header).append("\n");
-            }
-            String responseBody = EntityUtils.toString(response.getEntity());
-            currentRequest.setResponseBody(responseBody);
-            output.append("\n").append(responseBody);
-            if (currentRequest.getOutputName().length() != 0){
-                File file = new File("Saved Responses/" + currentRequest.getOutputName());
-                BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file));
-                outputStream.write(responseBody.getBytes());
-                outputStream.flush();
-                outputStream.close();
-                System.out.println("response saved to " + file.getAbsolutePath());
-            }
-            System.out.println(output.toString());
-            currentRequest.setResponseCode(response.getCode());
-            currentRequest.setResponseHeaders(response.getHeaders());
-            Header header = response.getHeader("Content-Length");
-            if (header == null)
-                currentRequest.setResponseSize("?");
-            else
-                currentRequest.setResponseSize(header.getValue());
-            currentRequest.setResponseStatusMessage(response.getReasonPhrase());
+        CloseableHttpClient client;
+        if (currentRequest.isFollowRedirect())
+            client = HttpClientBuilder.create().build();
+        else
+            client = HttpClientBuilder.create().disableRedirectHandling().build();
+        long start = System.currentTimeMillis();
+        CloseableHttpResponse response = client.execute(request);
+        long time = System.currentTimeMillis() - start;
+        currentRequest.setHaveResponse(true);
+        currentRequest.setResponseTime(time / 1000.0);
+
+        StringBuilder output = new StringBuilder();
+        output.append(response.getVersion()).append(" ")
+                .append(response.getCode()).append(" ")
+                .append(response.getReasonPhrase()).append("\n");
+        for (Header header : response.getHeaders())
+            output.append(header).append("\n");
+
+        String responseBody = EntityUtils.toString(response.getEntity());
+        currentRequest.setResponseBody(responseBody);
+        output.append("\n").append(responseBody);
+        System.out.println(output.toString());
+        currentRequest.setResponseCode(response.getCode());
+        currentRequest.setResponseHeaders(response.getHeaders());
+        Header header = response.getHeader("Content-Length");
+        if (header == null)
+            currentRequest.setResponseSize("?");
+        else
+            currentRequest.setResponseSize(header.getValue());
+        currentRequest.setResponseStatusMessage(response.getReasonPhrase());
 
     }
 
-    public void saveRequest(Request request){
+    public void saveRequest(Request request) {
         requests.add(request);
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("Saved Requests/requests.bin")))){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("Saved Requests/requests.bin")))) {
             oos.writeObject(requests);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void printHelp(){
+    private void printHelp() {
         System.out.println("-M\n--method       Set request method with the parameter followed by this argument");
         System.out.println("-H\n--headers      Set request headers in this format \"key1:value1;key2:value2;...\"");
         System.out.println("-i             to show response headers");
@@ -110,10 +97,11 @@ public class HttpManager {
         System.out.println("list           shows all saved requests");
         System.out.println();
     }
-    public void updateRequests(){
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("Saved Requests/requests.bin")))){
+
+    public void updateRequests() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("Saved Requests/requests.bin")))) {
             oos.writeObject(requests);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

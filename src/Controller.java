@@ -1,18 +1,10 @@
-import org.apache.hc.client5.http.HttpHostConnectException;
 import org.apache.hc.core5.http.Header;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.ProtocolException;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class Controller {
     private InsomniaView view;
@@ -39,7 +31,7 @@ public class Controller {
         public void valueChanged(ListSelectionEvent e) {
             JList<Request> requestJList = (JList<Request>) e.getSource();
             Request selectedRequest = requestJList.getSelectedValue();
-            updateFrame(selectedRequest);
+            updateView(selectedRequest);
         }
     }
 
@@ -58,77 +50,15 @@ public class Controller {
     private class SendRequestHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Request selectedRequest = leftPanel.getRequestsList().getSelectedValue();
-            if (selectedRequest != null) {
-                selectedRequest.setUrl(middlePanel.getUrlField().getText());
-                selectedRequest.setMethod((String) middlePanel.getMethod().getSelectedItem());
-                selectedRequest.getHeaders().clear();
-                for (JPanel headersPanel : middlePanel.getHeaders()) {
-                    JCheckBox checkBox = (JCheckBox) ((JPanel) headersPanel.getComponent(2)).getComponent(0);
-                    JTextField nameField = (JTextField) ((JPanel) headersPanel.getComponent(1)).getComponent(0);
-                    JTextField valueField = (JTextField) ((JPanel) headersPanel.getComponent(1)).getComponent(2);
-                    if (checkBox.isEnabled()) {
-                        if (!nameField.getText().equals("Header") || !valueField.getText().equals("Value")) {
-                            selectedRequest.getHeaders().put(nameField.getText(), valueField.getText());
-                        }
-                    }
-                }
-                String selectedMessageBody = ((JLabel) middlePanel.getTabs().getTabComponentAt(0)).getText();
-                selectedRequest.getFormData().clear();
-                if (selectedMessageBody.equals("Form Data")) {
-                    for (JPanel formDataPanel : middlePanel.getData()) {
-                        JCheckBox checkBox = (JCheckBox) ((JPanel) formDataPanel.getComponent(2)).getComponent(0);
-                        JTextField nameField = (JTextField) ((JPanel) formDataPanel.getComponent(1)).getComponent(0);
-                        JTextField valueField = (JTextField) ((JPanel) formDataPanel.getComponent(1)).getComponent(2);
-                        if (checkBox.isEnabled()) {
-                            if (!nameField.getText().equals("Name") || !valueField.getText().equals("Value")) {
-                                selectedRequest.getFormData().put(nameField.getText(), valueField.getText());
-                            }
-                        }
-                    }
-                } else if (selectedMessageBody.equals("JSON")) {
-                    selectedRequest.setJson(((JTextArea) ((JScrollPane) middlePanel.getJson().getComponent(0)).getViewport().getView()).getText());
-                    selectedRequest.setContentType("application/json");
-                } else if (selectedMessageBody.equals("Binary")) {
-                    if (!middlePanel.getBinaryPath().getText().equals("No File Selected")){
-                        selectedRequest.getFormData().put("file", middlePanel.getBinaryPath().getText());
-                        selectedRequest.setContentType("application/octet-stream");
-                    }
-                }
-                selectedRequest.getQueries().clear();
-                for (JPanel queryPanel : middlePanel.getQueries()) {
-                    JCheckBox checkBox = (JCheckBox) ((JPanel) queryPanel.getComponent(2)).getComponent(0);
-                    JTextField nameField = (JTextField) ((JPanel) queryPanel.getComponent(1)).getComponent(0);
-                    JTextField valueField = (JTextField) ((JPanel) queryPanel.getComponent(1)).getComponent(2);
-                    if (checkBox.isEnabled()) {
-                        if (!nameField.getText().equals("Name") || !valueField.getText().equals("Value")) {
-                            selectedRequest.getQueries().put(nameField.getText(), valueField.getText());
-                        }
-                    }
-                }
-                if (view.isFollowRedirect())
-                    selectedRequest.setFollowRedirect(true);
-                else
-                    selectedRequest.setFollowRedirect(false);
-                model.setCurrentRequest(selectedRequest);
-                try {
-                    model.requestProcessing(selectedRequest.build());
-                } catch (IOException | ProtocolException | URISyntaxException ex) {
-                    selectedRequest.setResponseSize("0");
-                    selectedRequest.setResponseStatusMessage("Error");
-                    selectedRequest.setResponseTime(0);
-                    selectedRequest.setResponseBody("");
-                    selectedRequest.setResponseHeaders(null);
-                    rightPanel.revalidate();
-                    ex.printStackTrace();
-                }
-                model.updateRequests();
-                updateFrame(selectedRequest);
-            }
+            new SendRequest(view, model).execute();
         }
     }
 
-    private void updateFrame(Request selectedRequest) {
+    private void updateView(Request selectedRequest) {
+        update(selectedRequest, middlePanel, rightPanel, leftPanel);
+    }
+
+    static void update(Request selectedRequest, MiddlePanel middlePanel, RightPanel rightPanel, LeftPanel leftPanel) {
         middlePanel.setSelectedMethod(selectedRequest.getMethod());
         middlePanel.setUrlText(selectedRequest.getUrl());
         middlePanel.removeAllItems();
@@ -158,7 +88,7 @@ public class Controller {
                 for (Header header : selectedRequest.getResponseHeaders())
                     rightPanel.addHeader(header.getName(), header.getValue());
             }catch (NullPointerException e){ }
-            ((JTextArea)((JScrollPane)rightPanel.getPreview().getComponent(0)).getViewport().getView()).setText("");
+            ((JTextArea)((JScrollPane) rightPanel.getPreview().getComponent(0)).getViewport().getView()).setText("");
             ((JTextArea) ((JScrollPane) rightPanel.getPreview().getComponent(0)).getViewport().getView()).setText(selectedRequest.getResponseBody());
         }
         rightPanel.revalidate();
