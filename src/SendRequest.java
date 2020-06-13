@@ -84,7 +84,7 @@ public class SendRequest extends SwingWorker {
             try {
                 model.requestProcessing(selectedRequest.build());
             } catch (IOException | ProtocolException | URISyntaxException ex) {
-                selectedRequest.setResponseSize("0");
+                selectedRequest.setResponseSize(0);
                 selectedRequest.setResponseStatusMessage("Error");
                 selectedRequest.setResponseTime(0);
                 selectedRequest.setResponseBody("Error: " + ex.getMessage());

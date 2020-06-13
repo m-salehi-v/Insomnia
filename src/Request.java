@@ -24,7 +24,7 @@ public class Request implements Serializable{
     private String json;
     private org.apache.hc.core5.http.Header[] responseHeaders;
     private double responseTime;
-    private String responseSize;
+    private int responseSize;
     private String responseBody;
     private int responseCode;
     private String responseStatusMessage;
@@ -72,11 +72,11 @@ public class Request implements Serializable{
         this.responseStatusMessage = responseStatusMessage;
     }
 
-    public String getResponseSize() {
+    public int getResponseSize() {
         return responseSize;
     }
 
-    public void setResponseSize(String responseSize) {
+    public void setResponseSize(int responseSize) {
         this.responseSize = responseSize;
     }
 
@@ -142,6 +142,10 @@ public class Request implements Serializable{
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getContentType() {
+        return contentType;
     }
 
     public void setJson(String json) {

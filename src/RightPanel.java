@@ -51,7 +51,7 @@ public class RightPanel extends JPanel {
 
         addStatusLine(0, "Error");
         addTimeLabel(0);
-        addSizeLabel("0");
+        addSizeLabel(0);
     }
     public void addStatusLine(int code, String message){
         topPanel.add(createStatusLabel(code, message));
@@ -59,7 +59,7 @@ public class RightPanel extends JPanel {
     public void addTimeLabel(double time){
         topPanel.add(createTimeLabel(time));
     }
-    public void addSizeLabel(String size){
+    public void addSizeLabel(int size){
         topPanel.add(createSizeLabel(size));
     }
     //initializes tabs that are header and preview
@@ -116,13 +116,10 @@ public class RightPanel extends JPanel {
     }
 
     //creates size label
-    private JLabel createSizeLabel(String size){
+    private JLabel createSizeLabel(int size){
 
         JLabel statusLabel = new JLabel();
-        if (size == null)
-            statusLabel.setText("SIZE ? B");
-        else
-            statusLabel.setText("SIZE " + size + " B");
+        statusLabel.setText("SIZE " + size + " B");
         statusLabel.setBackground(new Color(188, 191, 187));
         statusLabel.setForeground(Color.darkGray);
         statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
