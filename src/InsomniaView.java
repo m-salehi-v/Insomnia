@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.*;
 
 /**
  * it represents the main frame of the application that consists of
@@ -23,6 +24,7 @@ public class InsomniaView extends JFrame {
     //to show app must be hidden on system tray or not
     private boolean hideInSystemTray;
     private boolean followRedirect;
+    private boolean toggleSideBar;
 
     /**
      * Instantiates a new Insomnia view.
@@ -48,6 +50,14 @@ public class InsomniaView extends JFrame {
         return followRedirect;
     }
 
+    public JSplitPane getSplitPane1() {
+        return splitPane1;
+    }
+
+    public JSplitPane getSplitPane2() {
+        return splitPane2;
+    }
+
     //initializes menu bar of the application and menu item's functionality
     private void MenuBarInit() {
         menuBar = new JMenuBar();
@@ -65,16 +75,7 @@ public class InsomniaView extends JFrame {
         exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
         applicationMenu.add(options);
         applicationMenu.add(exit);
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (hideInSystemTray) {
-                    setVisible(false);
-                    systemTray();
-                } else
-                    System.exit(0);
-            }
-        });
+        exit.addActionListener(new ExitMenuHandler(this));
         JMenu viewMenu = new JMenu("View");
         viewMenu.setMnemonic('V');
         JMenuItem toggleFullScreen = new JMenuItem("Toggle Full Screen", 'F');
@@ -96,11 +97,14 @@ public class InsomniaView extends JFrame {
         toggleSidebar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (leftPanel.isVisible())
+                if (toggleSideBar) {
                     leftPanel.setVisible(false);
+                    toggleSideBar = false;
+                }
                 else {
                     leftPanel.setVisible(true);
                     splitPane1.setDividerLocation(265);
+                    toggleSideBar = true;
                 }
             }
         });
@@ -149,11 +153,23 @@ public class InsomniaView extends JFrame {
     //forms the main frame of the application using JSplitPane and three panels
     //from LeftPanel, MiddlePanel and RightPanel classes.
     private void initFrame() {
-        setSize(1175, 600);
+        Settings settings;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("settings")));){
+            settings = (Settings) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            settings = new Settings(1175, 600, 265, 770, false,
+                    false, false, false);
+        }
+        setSize( settings.getFrameWidth(), settings.getFrameHeight());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setIconImage(new ImageIcon(this.getClass().getResource("res/Insomnia.png")).getImage());
-
+        followRedirect = settings.isFollowRedirect();
+        hideInSystemTray = settings.isHideInSystemTray();
+        toggleSideBar = settings.isToggleSideBar();
+        isFullScreen = settings.isFullScreen();
+        if (isFullScreen)
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
         MenuBarInit();
 
         leftPanel = new LeftPanel();
@@ -162,13 +178,12 @@ public class InsomniaView extends JFrame {
 
         splitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, middlePanel);
         splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitPane1, rightPanel);
-        splitPane1.setDividerLocation(265);
-        splitPane2.setDividerLocation(770);
+        splitPane1.setDividerLocation(settings.getSeparator1Location());
+        splitPane2.setDividerLocation(settings.getSeparator2Location());
         splitPane1.setDividerSize(2);
         splitPane2.setDividerSize(2);
 
         add(splitPane2, BorderLayout.CENTER);
-//        setVisible(true);
     }
 
     //puts the program in system tray
@@ -188,12 +203,7 @@ public class InsomniaView extends JFrame {
             MenuItem open = new MenuItem("Open");
             open.addActionListener(openActionHandler);
             MenuItem exit = new MenuItem("Exit");
-            exit.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
+            exit.addActionListener(new ExitMenuHandler(this));
             popup.add(open);
             popup.add(exit);
 
@@ -247,5 +257,83 @@ public class InsomniaView extends JFrame {
         framePanel.add(checkBox2, BorderLayout.CENTER);
         frame.setContentPane(framePanel);
         frame.setVisible(true);
+    }
+    static class Settings implements Serializable {
+        private int frameHeight;
+        private int frameWidth;
+        private int separator1Location;
+        private int separator2Location;
+        private boolean followRedirect;
+        private boolean hideInSystemTray;
+        private boolean toggleSideBar;
+        private boolean fullScreen;
+
+        public Settings(int frameHeight, int frameWidth, int separator1Location, int separator2Location,
+                        boolean followRedirect, boolean hideInSystemTray, boolean toggleSideBar, boolean fullScreen) {
+            this.frameHeight = frameHeight;
+            this.frameWidth = frameWidth;
+            this.separator1Location = separator1Location;
+            this.separator2Location = separator2Location;
+            this.followRedirect = followRedirect;
+            this.hideInSystemTray = hideInSystemTray;
+            this.toggleSideBar = toggleSideBar;
+            this.fullScreen = fullScreen;
+        }
+
+        public int getFrameHeight() {
+            return frameHeight;
+        }
+
+        public int getFrameWidth() {
+            return frameWidth;
+        }
+
+        public int getSeparator1Location() {
+            return separator1Location;
+        }
+
+        public int getSeparator2Location() {
+            return separator2Location;
+        }
+
+        public boolean isFollowRedirect() {
+            return followRedirect;
+        }
+
+        public boolean isHideInSystemTray() {
+            return hideInSystemTray;
+        }
+
+        public boolean isToggleSideBar() {
+            return toggleSideBar;
+        }
+
+        public boolean isFullScreen() {
+            return fullScreen;
+        }
+    }
+    private class ExitMenuHandler implements ActionListener{
+        private InsomniaView insomniaView;
+
+        public ExitMenuHandler(InsomniaView insomniaView) {
+            this.insomniaView = insomniaView;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (hideInSystemTray && isVisible()) {
+                setVisible(false);
+                systemTray();
+            } else {
+                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("settings")));){
+                    oos.writeObject(new Settings(insomniaView.getHeight(), insomniaView.getWidth(), splitPane1.getDividerLocation(),
+                            splitPane2.getDividerLocation(), followRedirect, hideInSystemTray, toggleSideBar, isFullScreen));
+                    oos.flush();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                System.exit(0);
+            }
+        }
     }
 }

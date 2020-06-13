@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="aeda6928-7fdc-4358-a54b-0b37125cdea4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved Requests/requests.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Saved Requests/requests.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$10.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$4.class" afterDir="false" />
@@ -11,10 +13,25 @@
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$9.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HttpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HttpManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$CheckBoxActionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$CheckBoxActionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InsomniaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InsomniaView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MiddlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiddlePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +116,7 @@
       <workItem from="1591890086571" duration="1183000" />
       <workItem from="1591948609055" duration="19263000" />
       <workItem from="1591993389825" duration="1765000" />
-      <workItem from="1591995603450" duration="37679000" />
+      <workItem from="1591995603450" duration="48486000" />
     </task>
     <servers />
   </component>
@@ -124,10 +141,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1592018368791" />
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1592028327722">
+    <state x="447" y="167" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592040324084">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592028327722" />
+    <state x="447" y="167" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1592040324084" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1592045168778">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592045168778" />
     <state x="101" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591978044902">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -136,38 +157,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592032597940" />
-    <state width="1323" height="106" key="GridCell.Tab.0.bottom" timestamp="1592034754695">
+    <state width="1323" height="77" key="GridCell.Tab.0.bottom" timestamp="1592046018629">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="106" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592034754695" />
-    <state width="1323" height="106" key="GridCell.Tab.0.center" timestamp="1592034754695">
+    <state width="1323" height="77" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592046018629" />
+    <state width="1323" height="77" key="GridCell.Tab.0.center" timestamp="1592046018629">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="106" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592034754695" />
-    <state width="1323" height="106" key="GridCell.Tab.0.left" timestamp="1592034754695">
+    <state width="1323" height="77" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592046018629" />
+    <state width="1323" height="77" key="GridCell.Tab.0.left" timestamp="1592046018629">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="106" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592034754695" />
-    <state width="1323" height="106" key="GridCell.Tab.0.right" timestamp="1592034754695">
+    <state width="1323" height="77" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592046018629" />
+    <state width="1323" height="77" key="GridCell.Tab.0.right" timestamp="1592046018629">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="106" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592034754695" />
-    <state width="1323" height="184" key="GridCell.Tab.1.bottom" timestamp="1592032938550">
+    <state width="1323" height="77" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592046018629" />
+    <state width="1323" height="184" key="GridCell.Tab.1.bottom" timestamp="1592045858195">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="184" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592032938550" />
-    <state width="1323" height="184" key="GridCell.Tab.1.center" timestamp="1592032938550">
+    <state width="1323" height="184" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592045858195" />
+    <state width="1323" height="184" key="GridCell.Tab.1.center" timestamp="1592045858195">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="184" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1592032938550" />
-    <state width="1323" height="184" key="GridCell.Tab.1.left" timestamp="1592032938549">
+    <state width="1323" height="184" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1592045858195" />
+    <state width="1323" height="184" key="GridCell.Tab.1.left" timestamp="1592045858194">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="184" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1592032938549" />
-    <state width="1323" height="184" key="GridCell.Tab.1.right" timestamp="1592032938550">
+    <state width="1323" height="184" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1592045858194" />
+    <state width="1323" height="184" key="GridCell.Tab.1.right" timestamp="1592045858195">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="184" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1592032938550" />
+    <state width="1323" height="184" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1592045858195" />
     <state x="163" y="0" key="SettingsEditor" timestamp="1592025126271">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -188,10 +209,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1592017987429" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592025913181">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592045453253">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1592025913181" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1592045453253" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

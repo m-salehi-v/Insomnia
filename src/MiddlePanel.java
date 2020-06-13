@@ -185,14 +185,22 @@ public class MiddlePanel extends JPanel {
 
     //initializes no body tab
     private void noBodyInit(){
-        noBody = new JPanel(new BorderLayout(50,50));
+        noBody = new JPanel(new BorderLayout(0,15));
         noBody.setBackground(new Color(46, 47, 43));
+        noBody.setBorder(BorderFactory.createEmptyBorder(100,0,0,0));
         JLabel label = new JLabel("Select a body type from above");
-        label.setFont(new Font(null, Font.BOLD, 14));
+        label.setFont(new Font(null, Font.PLAIN, 14));
         label.setBackground(new Color(46, 47, 43));
         label.setForeground(Color.GRAY);
         label.setHorizontalAlignment(JLabel.CENTER);
-        noBody.add(label, BorderLayout.CENTER);
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("res/noBodyIcon.png"));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+//        panel.add(new JLabel(icon));
+        panel.add(label, BorderLayout.NORTH);
+        panel.setBackground(new Color(46, 47, 43));
+        noBody.add(new JLabel(icon), BorderLayout.NORTH);
+        noBody.add(panel, BorderLayout.CENTER);
     }
 
     //initializes JSON tab
