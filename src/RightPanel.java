@@ -31,6 +31,18 @@ public class RightPanel extends JPanel {
         return preview;
     }
 
+    public JPanel getTopPanel() {
+        return topPanel;
+    }
+
+    public JTabbedPane getTabs() {
+        return tabs;
+    }
+
+    public JPanel getHeader() {
+        return header;
+    }
+
     //initializes top panel that holds three labels to show response status
     private void topPanelInit() {
         topPanel = new JPanel();
@@ -39,16 +51,15 @@ public class RightPanel extends JPanel {
 
         addStatusLine(0, "Error");
         addTimeLabel(0);
-        addSizeLabel(0);
+        addSizeLabel("0");
     }
     public void addStatusLine(int code, String message){
-        topPanel.removeAll();
         topPanel.add(createStatusLabel(code, message));
     }
     public void addTimeLabel(double time){
         topPanel.add(createTimeLabel(time));
     }
-    public void addSizeLabel(double size){
+    public void addSizeLabel(String size){
         topPanel.add(createSizeLabel(size));
     }
     //initializes tabs that are header and preview
@@ -96,10 +107,13 @@ public class RightPanel extends JPanel {
     }
 
     //creates size label
-    private JLabel createSizeLabel(double size){
+    private JLabel createSizeLabel(String size){
 
         JLabel statusLabel = new JLabel();
-        statusLabel.setText("SIZE " + size + " KB");
+        if (size == null)
+            statusLabel.setText("SIZE ? B");
+        else
+            statusLabel.setText("SIZE " + size + " B");
         statusLabel.setBackground(new Color(188, 191, 187));
         statusLabel.setForeground(Color.darkGray);
         statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));

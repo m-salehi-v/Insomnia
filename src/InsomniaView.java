@@ -22,6 +22,7 @@ public class InsomniaView extends JFrame {
     private boolean isFullScreen;
     //to show app must be hidden on system tray or not
     private boolean hideInSystemTray;
+    private boolean followRedirect;
 
     /**
      * Instantiates a new Insomnia view.
@@ -41,6 +42,10 @@ public class InsomniaView extends JFrame {
 
     public RightPanel getRightPanel() {
         return rightPanel;
+    }
+
+    public boolean isFollowRedirect() {
+        return followRedirect;
     }
 
     //initializes menu bar of the application and menu item's functionality
@@ -203,6 +208,17 @@ public class InsomniaView extends JFrame {
             checkBox2.setSelected(true);
         else
             checkBox2.setSelected(false);
+        if (followRedirect)
+            checkBox1.setSelected(true);
+        else
+            checkBox1.setSelected(false);
+        checkBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JCheckBox checkBox = (JCheckBox) e.getSource();
+                followRedirect = checkBox.isSelected();
+            }
+        });
         checkBox2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

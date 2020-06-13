@@ -1,9 +1,10 @@
+import org.apache.hc.client5.http.HttpHostConnectException;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.core5.http.Header;
-import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.ProtocolException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.*;
@@ -30,40 +31,6 @@ public class HttpManager {
         this.currentRequest = currentRequest;
     }
 
-    public void run(String[] args) throws IllegalArgumentException{
-        if (args.length != 0) {
-            if (args[0].equals("list")) {
-                int i = 1;
-                for (Request Request : this.requests)
-                    System.out.println(i++ + " . " + Request.toString());
-            } else if (args[0].equals("fire")) {
-                for (int i = 1; i < args.length; i++){
-                    if (args[i].startsWith("-"))
-                        break;
-                    try {
-                        int requestNum = Integer.parseInt(args[i]) - 1;
-                        if (requestNum < requests.size() && requestNum >= 0) {
-                            currentRequest = requests.get(requestNum);
-                            requestProcessing(currentRequest.build(args));
-                        }
-                        else
-                            System.out.println("invalid number -> " + (requestNum + 1));
-                        System.out.println("----------------------------------------------------------------------------------------");
-                    } catch (NumberFormatException e){
-                        System.err.println("you should enter numbers after \"fire\" argument");
-                    }
-                }
-            } else {
-//                currentRequest = new Request();
-                HttpUriRequestBase requestBase = currentRequest.build(args);
-                if(currentRequest.isSaveRequest()){
-                    saveRequest(currentRequest);
-                }
-                requestProcessing(requestBase);
-            }
-        } else
-            System.err.println("no input");
-    }
 
     private void requestsInit(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("Saved Requests/requests.bin")))){
@@ -73,9 +40,9 @@ public class HttpManager {
             System.err.println(e.getMessage());
         }
     }
-    public void requestProcessing(HttpUriRequestBase request){
+    public void requestProcessing(HttpUriRequestBase request) throws IOException, ProtocolException, HttpHostConnectException {
 
-        try {
+
             CloseableHttpClient client;
             if (currentRequest.isFollowRedirect())
                 client = HttpClientBuilder.create().build();
@@ -84,6 +51,7 @@ public class HttpManager {
             long start = System.currentTimeMillis();
             CloseableHttpResponse response = client.execute(request);
             long time = System.currentTimeMillis() - start;
+            currentRequest.setHaveResponse(true);
             currentRequest.setResponseTime(time/1000.0);
             if (currentRequest.isShowHelp())
                 printHelp();
@@ -96,6 +64,7 @@ public class HttpManager {
                     output.append(header).append("\n");
             }
             String responseBody = EntityUtils.toString(response.getEntity());
+            currentRequest.setResponseBody(responseBody);
             output.append("\n").append(responseBody);
             if (currentRequest.getOutputName().length() != 0){
                 File file = new File("Saved Responses/" + currentRequest.getOutputName());
@@ -106,10 +75,15 @@ public class HttpManager {
                 System.out.println("response saved to " + file.getAbsolutePath());
             }
             System.out.println(output.toString());
-            currentRequest.setResponse(response);
-        } catch (IOException | ParseException e){
-            System.err.println(e.getMessage());
-        }
+            currentRequest.setResponseCode(response.getCode());
+            currentRequest.setResponseHeaders(response.getHeaders());
+            Header header = response.getHeader("Content-Length");
+            if (header == null)
+                currentRequest.setResponseSize("?");
+            else
+                currentRequest.setResponseSize(header.getValue());
+            currentRequest.setResponseStatusMessage(response.getReasonPhrase());
+
     }
 
     public void saveRequest(Request request){
@@ -135,5 +109,12 @@ public class HttpManager {
         System.out.println("fire           used to send saved requests: fire 1 3");
         System.out.println("list           shows all saved requests");
         System.out.println();
+    }
+    public void updateRequests(){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("Saved Requests/requests.bin")))){
+            oos.writeObject(requests);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

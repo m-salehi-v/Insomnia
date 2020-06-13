@@ -43,6 +43,10 @@ public class MiddlePanel extends JPanel {
         add(tabs, BorderLayout.CENTER);
     }
 
+    public JTextField getBinaryPath() {
+        return binaryPath;
+    }
+
     public JPanel getTopPanel() {
         return topPanel;
     }
@@ -562,6 +566,8 @@ public class MiddlePanel extends JPanel {
         if (queries.size() > 0) {
             queries.subList(0, queries.size()).clear();
         }
+        ((JTextArea) ((JScrollPane) json.getComponent(0)).getViewport().getView()).setText("...");
+        binaryPath.setText("No File Selected");
         updateHeaderQueryForm(headers, 1);
         updateHeaderQueryForm(queries, 2);
         updateHeaderQueryForm(data, 3);
