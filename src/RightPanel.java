@@ -57,13 +57,7 @@ public class RightPanel extends JPanel {
 
         headerInit();
 
-        preview = new JPanel();
-        JTextArea textArea = new JTextArea();
-        textArea.setEditable(false);
-        textArea.setBackground(new Color(46, 47, 43));
-        textArea.setLineWrap(true);
-        preview.add(new JScrollPane(textArea));
-        preview.setBackground(new Color(46, 47, 43));
+        previewInit();
 
         tabs.add(preview, "Preview");
         tabs.add(new JScrollPane(header), "Header");
@@ -126,6 +120,15 @@ public class RightPanel extends JPanel {
 
         header.add(button);
 
+    }
+    private void previewInit(){
+        preview = new JPanel(new BorderLayout());
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setBackground(new Color(46, 47, 43));
+        textArea.setLineWrap(true);
+        preview.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        preview.setBackground(new Color(46, 47, 43));
     }
 
     //creating a new name and value and putting them in a panel to be added to

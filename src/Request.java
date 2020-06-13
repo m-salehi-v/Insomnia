@@ -103,6 +103,58 @@ public class Request implements Serializable{
         return responseTime;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public void setHeaders(LinkedHashMap<String, String> headers) {
+        this.headers = headers;
+    }
+
+    public void setFormData(LinkedHashMap<String, String> formData) {
+        this.formData = formData;
+    }
+
+    public void setQueries(LinkedHashMap<String, String> queries) {
+        this.queries = queries;
+    }
+
+    public void setShowResponseHeaders(boolean showResponseHeaders) {
+        this.showResponseHeaders = showResponseHeaders;
+    }
+
+    public void setShowHelp(boolean showHelp) {
+        this.showHelp = showHelp;
+    }
+
+    public void setFollowRedirect(boolean followRedirect) {
+        this.followRedirect = followRedirect;
+    }
+
+    public void setOutputName(String outputName) {
+        this.outputName = outputName;
+    }
+
+    public void setSaveRequest(boolean saveRequest) {
+        this.saveRequest = saveRequest;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
+
     private void analyzeArgs(String[] args) throws IllegalArgumentException{
         url = args[0];
         for (int i = 1; i < args.length; i++){
@@ -139,8 +191,8 @@ public class Request implements Serializable{
                     case "-headers":
                         if ((i + 1) < args.length && !args[i + 1].startsWith("-"))
                             analyzeHeaders(args[i+1]);
-                        else
-                            throw new IllegalArgumentException("header requires parameter");
+//                        else
+//                            throw new IllegalArgumentException("header requires parameter");
                         break;
                     case "S":
                     case "-save":
@@ -149,11 +201,12 @@ public class Request implements Serializable{
                     case "d":
                     case "-data":
                         if (contentType.length() == 0) {
-                            if ((i + 1) < args.length && !args[i + 1].startsWith("-"))
+                            if ((i + 1) < args.length && !args[i + 1].startsWith("-")) {
                                 analyzeData(args[i + 1]);
-                            else
-                                throw new IllegalArgumentException("--data(-d) requires parameter");
-                            contentType = "multipart/form-data";
+                                contentType = "multipart/form-data";
+                            }
+//                            else
+//                                throw new IllegalArgumentException("--data(-d) requires parameter");
                         } else
                             throw new IllegalArgumentException("you can only use one type of message body");
                         break;
@@ -163,28 +216,32 @@ public class Request implements Serializable{
                                 formData.put("file", args[i + 1]);
                                 contentType = "application/octet-stream";
                             }
-                            else
-                                throw new IllegalArgumentException("--upload requires parameter");
+//                            else
+//                                throw new IllegalArgumentException("--upload requires parameter");
                         } else
                             throw new IllegalArgumentException("you can only use one type of message body");
                         break;
                     case "-urlencoded":
                         if (contentType.length() == 0) {
-                            if ((i + 1) < args.length && !args[i + 1].startsWith("-"))
+                            if ((i + 1) < args.length && !args[i + 1].startsWith("-")) {
                                 analyzeData(args[i + 1]);
-                            else
-                                throw new IllegalArgumentException("--urlencoded requires parameter");
-                            contentType = "application/x-www-form-urlencoded";
+                                contentType = "application/x-www-form-urlencoded";
+                            }
+//                            else {
+//                                throw new IllegalArgumentException("--urlencoded requires parameter");
+//                            }
                         }else
                             throw new IllegalArgumentException("you can only use one type of message body");
                         break;
                     case "json":
                         if (contentType.length() == 0) {
-                            if ((i + 1) < args.length && !args[i + 1].startsWith("-"))
+                            if ((i + 1) < args.length && !args[i + 1].startsWith("-")) {
                                 analyzeJson(args[i + 1]);
-                            else
-                                throw new IllegalArgumentException("-json requires parameter");
-                            contentType = "application/json";
+                                contentType = "application/json";
+                            }
+//                            else {
+//                                throw new IllegalArgumentException("-json requires parameter");
+//                            }
                         }else
                             throw new IllegalArgumentException("you can only use one type of message body");
                         break;

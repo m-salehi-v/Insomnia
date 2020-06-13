@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class MiddlePanel extends JPanel {
     private JPanel topPanel;
     private JComboBox<String> method;
     private JTextField urlField;
-    private JButton  send;
+    private JButton send;
     private JTabbedPane tabs;
     private JPanel header;
     private JPanel query;
@@ -22,9 +23,11 @@ public class MiddlePanel extends JPanel {
     private JPanel formData;
     private JPanel noBody;
     private JPanel json;
+    private JPanel binary;
     private ArrayList<JPanel> headers;
     private ArrayList<JPanel> queries;
     private ArrayList<JPanel> data;
+    private JTextField binaryPath;
 
     /**
      * Instantiates a new Middle panel.
@@ -168,6 +171,8 @@ public class MiddlePanel extends JPanel {
 
         jsonInit();
 
+        binaryInit();
+
         tabs.add(noBody, "Body");
         tabs.add(auth, "Auth");
         tabs.add(queryScrollable, "Query");
@@ -208,6 +213,50 @@ public class MiddlePanel extends JPanel {
         textArea.setLineWrap(true);
         textArea.setBackground(new Color(46, 47, 43));
         json.add(new JScrollPane(textArea), BorderLayout.CENTER);
+    }
+
+    private void binaryInit(){
+        binary = new JPanel(new BorderLayout());
+        binary.setBackground(new Color(46, 47, 43));
+        binary.setBorder(BorderFactory.createEmptyBorder(50, 20, 0, 20));
+        binaryPath = new JTextField("No File Selected");
+        binaryPath.setEditable(false);
+        binaryPath.setPreferredSize(new Dimension(binary.getPreferredSize().width, 35));
+        binaryPath.setBackground(new Color(45, 45, 45));
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 20,20));
+        buttons.setBackground(new Color(46, 47, 43));
+        JButton reset = new JButton("Reset File");
+        reset.setPreferredSize(new Dimension(reset.getPreferredSize().width + 7, reset.getPreferredSize().height + 7));
+        reset.setBorder(BorderFactory.createEmptyBorder());
+        reset.setFont(new Font(null, Font.PLAIN, 12));
+        reset.setBackground(new Color(46, 47, 43));
+        reset.setForeground(Color.gray);
+        reset.setFocusable(false);
+        reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                binaryPath.setText("No File Selected");
+            }
+        });
+        JButton chooser = new JButton("Choose File");
+
+        chooser.setPreferredSize(new Dimension(chooser.getPreferredSize().width + 15, chooser.getPreferredSize().height + 7));
+        chooser.setFocusable(false);
+        chooser.setBackground(new Color(46, 47, 43));
+        chooser.setFont(new Font(null, Font.PLAIN, 14));
+        chooser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+                    binaryPath.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            }
+        });
+        buttons.add(reset);
+        buttons.add(chooser);
+        binary.add(binaryPath, BorderLayout.NORTH);
+        binary.add(buttons);
+
     }
 
     //creates a panel that includes two text fields one for name/header and one for value
@@ -519,6 +568,9 @@ public class MiddlePanel extends JPanel {
         updateUI();
     }
 
+    public void addSendRequestActionHandler(ActionListener listener){
+        send.addActionListener(listener);
+    }
     //shows a popup menu when first tab is clicked to select another tab
     //and the selected tab will be shown
     private class selectTabHandler extends MouseAdapter{
@@ -547,6 +599,17 @@ public class MiddlePanel extends JPanel {
                     jsonLabel.addMouseListener(new selectTabHandler());
                     tabs.setTabComponentAt(0, jsonLabel);
                     tabs.setComponentAt(0, json);
+                    tabs.setSelectedIndex(0);
+                    revalidate();
+                }
+            });
+            menuItem3.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel binaryLabel = new JLabel("Binary");
+                    binaryLabel.addMouseListener(new selectTabHandler());
+                    tabs.setTabComponentAt(0, binaryLabel);
+                    tabs.setComponentAt(0, binary);
                     tabs.setSelectedIndex(0);
                     revalidate();
                 }

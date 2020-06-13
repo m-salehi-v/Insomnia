@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="aeda6928-7fdc-4358-a54b-0b37125cdea4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved Requests/requests.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Saved Requests/requests.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller$NewRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller$NewRequestHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller$RequestsListSelectionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller$RequestsListSelectionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" afterDir="false" />
@@ -20,7 +21,6 @@
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Request.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HttpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HttpManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MiddlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiddlePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RightPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RightPanel.java" afterDir="false" />
@@ -29,6 +29,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="185" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -105,7 +108,7 @@
       <workItem from="1591890086571" duration="1183000" />
       <workItem from="1591948609055" duration="19263000" />
       <workItem from="1591993389825" duration="1765000" />
-      <workItem from="1591995603450" duration="2425000" />
+      <workItem from="1591995603450" duration="13683000" />
     </task>
     <servers />
   </component>
@@ -126,10 +129,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591989592087">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1592004662196">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591989592087" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592004662196" />
     <state x="101" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591978044902">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -138,22 +141,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591981848992" />
-    <state width="1323" height="129" key="GridCell.Tab.0.bottom" timestamp="1591997256418">
+    <state width="1323" height="129" key="GridCell.Tab.0.bottom" timestamp="1592010001373">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="129" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591997256418" />
-    <state width="1323" height="129" key="GridCell.Tab.0.center" timestamp="1591997256418">
+    <state width="1323" height="129" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592010001373" />
+    <state width="1323" height="129" key="GridCell.Tab.0.center" timestamp="1592010001373">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="129" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591997256418" />
-    <state width="1323" height="129" key="GridCell.Tab.0.left" timestamp="1591997256418">
+    <state width="1323" height="129" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592010001373" />
+    <state width="1323" height="129" key="GridCell.Tab.0.left" timestamp="1592010001372">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="129" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591997256418" />
-    <state width="1323" height="129" key="GridCell.Tab.0.right" timestamp="1591997256418">
+    <state width="1323" height="129" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592010001372" />
+    <state width="1323" height="129" key="GridCell.Tab.0.right" timestamp="1592010001373">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="129" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591997256418" />
+    <state width="1323" height="129" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592010001373" />
     <state width="1323" height="215" key="GridCell.Tab.1.bottom" timestamp="1591983714931">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -193,5 +196,8 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Insomnia$Main.ic" NAME="Main Coverage Results" MODIFIED="1592002338311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

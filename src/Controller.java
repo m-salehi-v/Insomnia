@@ -5,10 +5,11 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Controller {
     private InsomniaView view;
@@ -27,9 +28,10 @@ public class Controller {
         leftPanel.requestsListModelInit(model.getRequests());
         leftPanel.addCreateNewRequestHandler(new NewRequestHandler());
         leftPanel.addListSelectionHandler(new RequestsListSelectionHandler());
+        middlePanel.addSendRequestActionHandler(new SendRequestHandler());
     }
 
-    private class RequestsListSelectionHandler implements ListSelectionListener{
+    private class RequestsListSelectionHandler implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             JList<Request> requestJList = (JList<Request>) e.getSource();
@@ -38,7 +40,7 @@ public class Controller {
         }
     }
 
-    private class NewRequestHandler implements ActionListener{
+    private class NewRequestHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Request request = new Request(leftPanel.getNewRequestNameTextField().getText(),
@@ -50,24 +52,72 @@ public class Controller {
         }
     }
 
-    private void updateFrame(Request selectedRequest){
+    private class SendRequestHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Request selectedRequest = leftPanel.getRequestsList().getSelectedValue();
+            if (selectedRequest != null) {
+                selectedRequest.setUrl(middlePanel.getUrlField().getText());
+                selectedRequest.setMethod((String) middlePanel.getMethod().getSelectedItem());
+                for (JPanel headersPanel : middlePanel.getHeaders()) {
+                    JCheckBox checkBox = (JCheckBox) ((JPanel) headersPanel.getComponent(2)).getComponent(0);
+                    JTextField nameField = (JTextField) ((JPanel) headersPanel.getComponent(1)).getComponent(0);
+                    JTextField valueField = (JTextField) ((JPanel) headersPanel.getComponent(1)).getComponent(1);
+                    if (checkBox.isEnabled()) {
+                        if (!nameField.getText().equals("Header") || !valueField.getText().equals("Value")) {
+                            selectedRequest.getHeaders().put(nameField.getText(), valueField.getText());
+                        }
+                    }
+                }
+                String selectedMessageBody = ((JLabel) middlePanel.getTabs().getTabComponentAt(0)).getText();
+                if (selectedMessageBody.equals("Form Data")) {
+                    for (JPanel formDataPanel : middlePanel.getData()) {
+                        JCheckBox checkBox = (JCheckBox) ((JPanel) formDataPanel.getComponent(2)).getComponent(0);
+                        JTextField nameField = (JTextField) ((JPanel) formDataPanel.getComponent(1)).getComponent(0);
+                        JTextField valueField = (JTextField) ((JPanel) formDataPanel.getComponent(1)).getComponent(1);
+                        if (checkBox.isEnabled()) {
+                            if (!nameField.getText().equals("Name") || !valueField.getText().equals("Value")) {
+                                selectedRequest.getFormData().put(nameField.getText(), valueField.getText());
+                            }
+                        }
+                    }
+                } else if (selectedMessageBody.equals("JSON")) {
+                    selectedRequest.setJson(((JTextArea) ((JScrollPane) rightPanel.getPreview().getComponent(0)).getViewport().getView()).getText());
+                } else if (selectedMessageBody.equals("Binary")) {
+
+                }
+                for (JPanel queryPanel : middlePanel.getQueries()) {
+                    JCheckBox checkBox = (JCheckBox) ((JPanel) queryPanel.getComponent(3)).getComponent(1);
+                    JTextField nameField = (JTextField) ((JPanel) queryPanel.getComponent(2)).getComponent(1);
+                    JTextField valueField = (JTextField) ((JPanel) queryPanel.getComponent(2)).getComponent(2);
+                    if (checkBox.isEnabled()) {
+                        if (!nameField.getText().equals("Name") || !valueField.getText().equals("Value")) {
+                            selectedRequest.getQueries().put(nameField.getText(), valueField.getText());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateFrame(Request selectedRequest) {
         middlePanel.setSelectedMethod(selectedRequest.getMethod());
         middlePanel.setUrlText(selectedRequest.getUrl());
         middlePanel.removeAllItems();
-        for (String key: selectedRequest.getHeaders().keySet()){
+        for (String key : selectedRequest.getHeaders().keySet()) {
             JPanel item = middlePanel.createItem(middlePanel.getHeaders(), 1, false, key, selectedRequest.getHeaders().get(key));
             middlePanel.addHeaderQueryForm(middlePanel.getHeaders(), item, 1);
         }
-        for (String name: selectedRequest.getFormData().keySet()){
+        for (String name : selectedRequest.getFormData().keySet()) {
             JPanel item = middlePanel.createItem(middlePanel.getData(), 3, false, name, selectedRequest.getFormData().get(name));
             middlePanel.addHeaderQueryForm(middlePanel.getData(), item, 3);
         }
-        for (String name: selectedRequest.getQueries().keySet()){
+        for (String name : selectedRequest.getQueries().keySet()) {
             JPanel item = middlePanel.createItem(middlePanel.getQueries(), 2, false, name, selectedRequest.getQueries().get(name));
             middlePanel.addHeaderQueryForm(middlePanel.getQueries(), item, 2);
         }
-        if (selectedRequest.getJson().length() != 0){
-            ((JTextArea)((JScrollPane)middlePanel.getJson().getComponent(0)).getViewport().getView()).setText(selectedRequest.getJson());
+        if (selectedRequest.getJson().length() != 0) {
+            ((JTextArea) ((JScrollPane) middlePanel.getJson().getComponent(0)).getViewport().getView()).setText(selectedRequest.getJson());
         }
         if (selectedRequest.getResponse() != null) {
             rightPanel.addStatusLine(selectedRequest.getResponse().getCode(), selectedRequest.getResponse().getReasonPhrase());
