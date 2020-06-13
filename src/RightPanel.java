@@ -19,7 +19,7 @@ public class RightPanel extends JPanel {
     private JPanel raw;
     private JPanel preview;
     private JEditorPane editorPane;
-
+    private JButton cpyButton;
 
     /**
      * Instantiates a new Right panel.
@@ -58,6 +58,10 @@ public class RightPanel extends JPanel {
             editorPane.setContentType("text/html");
             editorPane.setText("<html><h1>Could not load</h1></html>");
         }
+    }
+
+    public JButton getCpyButton() {
+        return cpyButton;
     }
 
     //initializes top panel that holds three labels to show response status
@@ -144,7 +148,10 @@ public class RightPanel extends JPanel {
     private JLabel createSizeLabel(int size){
 
         JLabel statusLabel = new JLabel();
-        statusLabel.setText("SIZE " + size + " B");
+        if(size < 1000)
+            statusLabel.setText("SIZE " + size + " B");
+        else
+            statusLabel.setText("SIZE " + size/1000.0 + " KB");
         statusLabel.setBackground(new Color(188, 191, 187));
         statusLabel.setForeground(Color.darkGray);
         statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
@@ -160,12 +167,13 @@ public class RightPanel extends JPanel {
         header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
         header.setBackground(new Color(46, 47, 43));
         header.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-
-        JButton button = new JButton("Copy to Clipboard");
-
-        header.add(button);
-
     }
+
+    public void addCopyButton(){
+        cpyButton = new JButton("Copy to Clipboard");
+        header.add(cpyButton);
+    }
+
     private void rawInit(){
         raw = new JPanel(new BorderLayout());
         JTextArea textArea = new JTextArea();

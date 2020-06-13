@@ -45,28 +45,8 @@ public class MiddlePanel extends JPanel {
         return binaryPath;
     }
 
-    public JPanel getTopPanel() {
-        return topPanel;
-    }
-
     public JTabbedPane getTabs() {
         return tabs;
-    }
-
-    public JPanel getHeader() {
-        return header;
-    }
-
-    public JPanel getQuery() {
-        return query;
-    }
-
-    public JPanel getFormData() {
-        return formData;
-    }
-
-    public JPanel getNoBody() {
-        return noBody;
     }
 
     public JPanel getJson() {
@@ -210,7 +190,7 @@ public class MiddlePanel extends JPanel {
         textArea.setBackground(new Color(46, 47, 43));
         json.add(new JScrollPane(textArea), BorderLayout.CENTER);
     }
-
+    //initializes binary tab
     private void binaryInit(){
         binary = new JPanel(new BorderLayout());
         binary.setBackground(new Color(46, 47, 43));
@@ -255,7 +235,7 @@ public class MiddlePanel extends JPanel {
 
     }
 
-    //creates a panel that includes two text fields one for name/header and one for value
+    //creates a panel with given name and value that includes two text fields one for name/header and one for value
     //and a check box and a delete button. items ArrayList is the ArrayList that created item will be added to
     //type indicates the item belongs to which panel(0 for new 1 for header 2 for query 3 for form data)
     //new boolean shows if a "adding new" item must be created
@@ -499,6 +479,10 @@ public class MiddlePanel extends JPanel {
         }
     }
 
+
+    /**
+     * Removes all items in headers, data and queries array lists.
+     */
     public void removeAllItems(){
         if (headers.size() > 0) {
             headers.subList(0, headers.size()).clear();
@@ -517,6 +501,7 @@ public class MiddlePanel extends JPanel {
         updateUI();
     }
 
+    //send button's listener would be added in Controller Class with the help of this method
     public void addSendRequestActionHandler(ActionListener listener){
         send.addActionListener(listener);
     }

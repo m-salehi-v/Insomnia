@@ -140,10 +140,14 @@ public class LeftPanel extends JPanel {
         frame.setVisible(true);
     }
 
+    //with help of this method we'll be able to add listener for requestsList
+    //from Controller Class
     public void addListSelectionHandler(ListSelectionListener listener){
         requestsList.addListSelectionListener(listener);
     }
 
+    //with help of this method we'll be able to add listener for add new Request button
+    //from Controller Class
     public void addCreateNewRequestHandler(ActionListener listener){
         createNewRequestButton.addActionListener(listener);
     }

@@ -4,6 +4,13 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ * This class is extending SwingWorker so when it's running our
+ * application won't freeze. all user inputs are gathered here in
+ * doInBackground method and the selected request's fields get initialized
+ *
+ * @author Mohammad Salehi Vaziri
+ */
 public class SendRequest extends SwingWorker {
     private InsomniaView view;
     private HttpManager model;
@@ -11,6 +18,12 @@ public class SendRequest extends SwingWorker {
     private LeftPanel leftPanel;
     private MiddlePanel middlePanel;
 
+    /**
+     * Instantiates a new SendRequest.
+     *
+     * @param view  the view
+     * @param model the model
+     */
     public SendRequest(InsomniaView view, HttpManager model) {
         this.view = view;
         this.model = model;
@@ -89,8 +102,8 @@ public class SendRequest extends SwingWorker {
                 selectedRequest.getResponse().setTime(0);
                 selectedRequest.getResponse().setBody("Error: " + ex.getMessage());
                 selectedRequest.getResponse().setHeaders(null);
+                rightPanel.getEditorPane().setText("");
                 rightPanel.revalidate();
-                ex.printStackTrace();
             }
             model.updateRequests();
             updateView(selectedRequest);

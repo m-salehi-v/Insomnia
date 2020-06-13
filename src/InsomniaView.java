@@ -34,26 +34,56 @@ public class InsomniaView extends JFrame {
         initFrame();
     }
 
+    /**
+     * Gets left panel.
+     *
+     * @return the left panel
+     */
     public LeftPanel getLeftPanel() {
         return leftPanel;
     }
 
+    /**
+     * Gets middle panel.
+     *
+     * @return the middle panel
+     */
     public MiddlePanel getMiddlePanel() {
         return middlePanel;
     }
 
+    /**
+     * Gets right panel.
+     *
+     * @return the right panel
+     */
     public RightPanel getRightPanel() {
         return rightPanel;
     }
 
+    /**
+     * Is follow redirect boolean.
+     *
+     * @return the boolean
+     */
     public boolean isFollowRedirect() {
         return followRedirect;
     }
 
+    /**
+     * Gets split pane 1.
+     *
+     * @return the split pane 1
+     */
     public JSplitPane getSplitPane1() {
         return splitPane1;
     }
 
+    /**
+     * Gets split pane 2.
+     *
+     * @return the split pane 2
+     */
     public JSplitPane getSplitPane2() {
         return splitPane2;
     }
@@ -154,6 +184,7 @@ public class InsomniaView extends JFrame {
     //from LeftPanel, MiddlePanel and RightPanel classes.
     private void initFrame() {
         Settings settings;
+        //trying to load saved settings, otherwise default settings will be applied
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("settings")));){
             settings = (Settings) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -257,6 +288,10 @@ public class InsomniaView extends JFrame {
         frame.setContentPane(framePanel);
         frame.setVisible(true);
     }
+
+    /**
+     * this class is created so maintaining program settings would be easier.
+     */
     static class Settings implements Serializable {
         private int frameHeight;
         private int frameWidth;
@@ -311,6 +346,8 @@ public class InsomniaView extends JFrame {
             return fullScreen;
         }
     }
+
+    //save last settings before exiting app.
     private class ExitMenuHandler implements ActionListener{
         private InsomniaView insomniaView;
 

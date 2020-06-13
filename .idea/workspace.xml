@@ -9,12 +9,19 @@
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller$SendRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller$SendRequestHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/HttpManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$ExitMenuHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$ExitMenuHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView$Settings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/InsomniaView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel$RequestRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel$RequestRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/LeftPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$3.class" afterDir="false" />
@@ -24,21 +31,21 @@
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$PromptTextHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$deleteAllHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel$selectTabHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/MiddlePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Request.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/Response.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/RightPanel$SelectTabHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/RightPanel$SelectTabHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/RightPanel$SelectTabHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/RightPanel$SelectTabHandler$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Insomnia/RightPanel$SelectTabHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/RightPanel$SelectTabHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/RightPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/RightPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Insomnia/SendRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Insomnia/SendRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings" beforeDir="false" afterPath="$PROJECT_DIR$/settings" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HttpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HttpManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InsomniaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InsomniaView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LeftPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LeftPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MiddlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiddlePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RightPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RightPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SendRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SendRequest.java" afterDir="false" />
     </list>
@@ -125,7 +132,7 @@
       <workItem from="1591890086571" duration="1183000" />
       <workItem from="1591948609055" duration="19263000" />
       <workItem from="1591993389825" duration="1765000" />
-      <workItem from="1591995603450" duration="64533000" />
+      <workItem from="1591995603450" duration="70693000" />
     </task>
     <servers />
   </component>
@@ -166,22 +173,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592048390806" />
-    <state width="1323" height="119" key="GridCell.Tab.0.bottom" timestamp="1592068713814">
+    <state width="1323" height="57" key="GridCell.Tab.0.bottom" timestamp="1592075870323">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592068713814" />
-    <state width="1323" height="119" key="GridCell.Tab.0.center" timestamp="1592068713814">
+    <state width="1323" height="57" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592075870323" />
+    <state width="1323" height="57" key="GridCell.Tab.0.center" timestamp="1592075870323">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592068713814" />
-    <state width="1323" height="119" key="GridCell.Tab.0.left" timestamp="1592068713814">
+    <state width="1323" height="57" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592075870323" />
+    <state width="1323" height="57" key="GridCell.Tab.0.left" timestamp="1592075870323">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592068713814" />
-    <state width="1323" height="119" key="GridCell.Tab.0.right" timestamp="1592068713814">
+    <state width="1323" height="57" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592075870323" />
+    <state width="1323" height="57" key="GridCell.Tab.0.right" timestamp="1592075870323">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592068713814" />
+    <state width="1323" height="57" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592075870323" />
     <state width="1323" height="152" key="GridCell.Tab.1.bottom" timestamp="1592068150747">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -222,22 +229,6 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1592045453253" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/HttpManager.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/SendRequest.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Insomnia$Main.ic" NAME="Main Coverage Results" MODIFIED="1592002338311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
