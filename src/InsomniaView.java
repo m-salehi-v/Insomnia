@@ -168,8 +168,7 @@ public class InsomniaView extends JFrame {
         hideInSystemTray = settings.isHideInSystemTray();
         toggleSideBar = settings.isToggleSideBar();
         isFullScreen = settings.isFullScreen();
-        if (isFullScreen)
-            setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         MenuBarInit();
 
         leftPanel = new LeftPanel();

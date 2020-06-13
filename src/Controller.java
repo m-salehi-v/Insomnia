@@ -5,6 +5,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class Controller {
     private InsomniaView view;
@@ -94,17 +96,19 @@ public class Controller {
         }
         if (selectedRequest.isHaveResponse()) {
             rightPanel.getTopPanel().removeAll();
-            rightPanel.addStatusLine(selectedRequest.getResponseCode(), selectedRequest.getResponseStatusMessage());
-            rightPanel.addTimeLabel(selectedRequest.getResponseTime());
-            rightPanel.addSizeLabel(selectedRequest.getResponseSize());
+            rightPanel.addStatusLine(selectedRequest.getResponse().getCode(), selectedRequest.getResponse().getStatusMessage());
+            rightPanel.addTimeLabel(selectedRequest.getResponse().getTime());
+            rightPanel.addSizeLabel(selectedRequest.getResponse().getSize());
 
             rightPanel.getHeader().removeAll();
             try {
-                for (Header header : selectedRequest.getResponseHeaders())
+                for (Header header : selectedRequest.getResponse().getHeaders())
                     rightPanel.addHeader(header.getName(), header.getValue());
             }catch (NullPointerException e){ }
-            ((JTextArea)((JScrollPane) rightPanel.getPreview().getComponent(0)).getViewport().getView()).setText("");
-            ((JTextArea) ((JScrollPane) rightPanel.getPreview().getComponent(0)).getViewport().getView()).setText(selectedRequest.getResponseBody());
+            ((JTextArea)((JScrollPane) rightPanel.getRaw().getComponent(0)).getViewport().getView()).setText("");
+            ((JTextArea) ((JScrollPane) rightPanel.getRaw().getComponent(0)).getViewport().getView()).setText(selectedRequest.getResponse().getBody());
+
+            rightPanel.setEditorPaneURL(selectedRequest.getUrl() + selectedRequest.getQuery());
         }
         rightPanel.revalidate();
         middlePanel.revalidate();

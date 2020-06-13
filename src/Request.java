@@ -8,7 +8,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.util.LinkedHashMap;
 
-public class Request implements Serializable{
+public class Request implements Serializable {
     private String name;
     private String url;
     private String method;
@@ -22,22 +22,14 @@ public class Request implements Serializable{
     private boolean followRedirect;
     private String contentType;
     private String json;
-    private org.apache.hc.core5.http.Header[] responseHeaders;
-    private double responseTime;
-    private int responseSize;
-    private String responseBody;
-    private int responseCode;
-    private String responseStatusMessage;
     private boolean haveResponse;
+    private String query;
+    private Response response;
 
-    public Request(String name, String method) throws IllegalArgumentException{
+    public Request(String name, String method) throws IllegalArgumentException {
         this.name = name;
         this.method = method;
         initWithDefaults();
-    }
-
-    public void setResponseBody(String responseBody) {
-        this.responseBody = responseBody;
     }
 
     public void setHaveResponse(boolean haveResponse) {
@@ -46,38 +38,6 @@ public class Request implements Serializable{
 
     public boolean isHaveResponse() {
         return haveResponse;
-    }
-
-    public String getResponseBody() {
-        return responseBody;
-    }
-
-    public void setResponseHeaders(org.apache.hc.core5.http.Header[] responseHeaders) {
-        this.responseHeaders = responseHeaders;
-    }
-
-    public int getResponseCode() {
-        return responseCode;
-    }
-
-    public String getResponseStatusMessage() {
-        return responseStatusMessage;
-    }
-
-    public void setResponseCode(int responseCode) {
-        this.responseCode = responseCode;
-    }
-
-    public void setResponseStatusMessage(String responseStatusMessage) {
-        this.responseStatusMessage = responseStatusMessage;
-    }
-
-    public int getResponseSize() {
-        return responseSize;
-    }
-
-    public void setResponseSize(int responseSize) {
-        this.responseSize = responseSize;
     }
 
     public String getName() {
@@ -90,6 +50,10 @@ public class Request implements Serializable{
 
     public boolean isShowResponseHeaders() {
         return showResponseHeaders;
+    }
+
+    public String getQuery() {
+        return query;
     }
 
     public boolean isFollowRedirect() {
@@ -114,18 +78,6 @@ public class Request implements Serializable{
 
     public String getJson() {
         return json;
-    }
-
-    public Header[] getResponseHeaders() {
-        return responseHeaders;
-    }
-
-    public void setResponseTime(double responseTime) {
-        this.responseTime = responseTime;
-    }
-
-    public double getResponseTime() {
-        return responseTime;
     }
 
     public void setUrl(String url) {
@@ -164,7 +116,11 @@ public class Request implements Serializable{
         return uncheckedQueries;
     }
 
-    private void initWithDefaults(){
+    public Response getResponse() {
+        return response;
+    }
+
+    private void initWithDefaults() {
         url = "";
         headers = new LinkedHashMap<>();
         formData = new LinkedHashMap<>();
@@ -176,39 +132,40 @@ public class Request implements Serializable{
         followRedirect = false;
         contentType = "";
         json = "";
-        responseHeaders = null;
+        query = "";
+        response = new Response();
     }
 
     public HttpUriRequestBase build() throws URISyntaxException {
         HttpUriRequestBase request = null;
-        URIBuilder builder = null;
-
-            builder = new URIBuilder(url);
-            for(String name: queries.keySet())
-                builder.setParameter(name, queries.get(name));
-        switch (method){
+        StringBuilder builder = new StringBuilder();
+        builder.append("?");
+        for (String name : queries.keySet())
+            builder.append(name).append("=").append(queries.get(name)).append("&");
+        query =  builder.toString();
+        switch (method) {
             case "GET":
-                request = new HttpGet(builder.build());
+                request = new HttpGet(url + query);
                 break;
             case "POST":
-                request = new HttpPost(builder.build());
+                request = new HttpPost(url + query);
                 break;
             case "DELETE":
-                request = new HttpDelete(builder.build());
+                request = new HttpDelete(url + query);
                 break;
             case "PATCH":
-                request = new HttpPatch(builder.build());
+                request = new HttpPatch(url + query);
                 break;
             case "PUT":
-                request = new HttpPut(builder.build());
+                request = new HttpPut(url + query);
                 break;
             default:
                 throw new IllegalArgumentException("This method is invalid -> " + method);
         }
 
-        for (String key: headers.keySet())
+        for (String key : headers.keySet())
             request.addHeader(key, headers.get(key));
-        if(formData.size() != 0) {
+        if (formData.size() != 0) {
             MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
             for (String key : formData.keySet()) {
                 if (key.contains("file")) {
@@ -219,16 +176,20 @@ public class Request implements Serializable{
             }
             HttpEntity entity = entityBuilder.build();
             if (contentType.equals("application/octet-stream"))
-                 request.addHeader("Content-Type", contentType);
+                request.addHeader("Content-Type", contentType);
             request.setEntity(entity);
-        } else if (json.length() != 0){
+        } else if (json.length() != 0) {
             request.setEntity(new StringEntity(json));
             request.addHeader("Content-Type", contentType);
         }
         return request;
     }
 
-
+    public String createRandomFileName(){
+        String tmp = "" + System.nanoTime() + ".png";
+        response.setImageOutputName(tmp);
+        return tmp;
+    }
 
     @Override
     public String toString() {

@@ -50,7 +50,7 @@ public class HttpManager {
         CloseableHttpResponse response = client.execute(request);
         long time = System.currentTimeMillis() - start;
         currentRequest.setHaveResponse(true);
-        currentRequest.setResponseTime(time / 1000.0);
+        currentRequest.getResponse().setTime(time / 1000.0);
 
         StringBuilder output = new StringBuilder();
         output.append(response.getVersion()).append(" ")
@@ -58,6 +58,7 @@ public class HttpManager {
                 .append(response.getReasonPhrase()).append("\n");
         for (Header header : response.getHeaders())
             output.append(header).append("\n");
+        currentRequest.getResponse().setContentType(response.getHeader("Content-Type").getValue());
         String responseBody;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         if(response.getEntity() == null)
@@ -65,29 +66,31 @@ public class HttpManager {
         else {
             InputStream in = response.getEntity().getContent();
             int r;
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096];
             while ((r = in.read(buffer, 0, buffer.length)) != -1) {
                 baos.write(buffer, 0, r);
             }
             baos.flush();
             responseBody = baos.toString();
-            currentRequest.setResponseSize(baos.toByteArray().length);
+            currentRequest.getResponse().setSize(baos.toByteArray().length);
             in.close();
         }
+        if (response.getHeader("Content-Type").getValue().contains("image/png")) {
+            File file = new File("Saved Images/" + currentRequest.createRandomFileName());
+            BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+            os.write(baos.toByteArray());
+            baos.close();
+            os.close();
+        }
         if (response.getHeader("Content-Type").getValue().contains("application/json"))
-            currentRequest.setResponseBody(new JSONObject(responseBody).toString(2));
+            currentRequest.getResponse().setBody(new JSONObject(responseBody).toString(2));
         else
-            currentRequest.setResponseBody(responseBody);
+            currentRequest.getResponse().setBody(responseBody);
         output.append("\n").append(responseBody);
         System.out.println(output.toString());
-        currentRequest.setResponseCode(response.getCode());
-        currentRequest.setResponseHeaders(response.getHeaders());
-//        Header header = response.getHeader("Content-Length");
-//        if (header == null)
-//            currentRequest.setResponseSize("?");
-//        else
-//            currentRequest.setResponseSize(header.getValue());
-        currentRequest.setResponseStatusMessage(response.getReasonPhrase());
+        currentRequest.getResponse().setCode(response.getCode());
+        currentRequest.getResponse().setHeaders(response.getHeaders());
+        currentRequest.getResponse().setStatusMessage(response.getReasonPhrase());
 
     }
 

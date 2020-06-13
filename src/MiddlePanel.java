@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -179,7 +178,7 @@ public class MiddlePanel extends JPanel {
         updateHeaderQueryForm(data, 3);
 
         JLabel bodyTabLabel = new JLabel("No Body");
-        bodyTabLabel.addMouseListener(new selectTabHandler());
+        bodyTabLabel.addMouseListener(new SelectTabHandler());
         tabs.setTabComponentAt(0, bodyTabLabel);
     }
 
@@ -523,7 +522,7 @@ public class MiddlePanel extends JPanel {
     }
     //shows a popup menu when first tab is clicked to select another tab
     //and the selected tab will be shown
-    private class selectTabHandler extends MouseAdapter{
+    private class SelectTabHandler extends MouseAdapter{
         @Override
         public void mouseReleased(MouseEvent e) {
             JPopupMenu popupMenu = new JPopupMenu();
@@ -535,7 +534,7 @@ public class MiddlePanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JLabel formDataLabel = new JLabel("Form Data");
-                    formDataLabel.addMouseListener(new selectTabHandler());
+                    formDataLabel.addMouseListener(new SelectTabHandler());
                     tabs.setTabComponentAt(0, formDataLabel);
                     tabs.setComponentAt(0, new JScrollPane(formData));
                     tabs.setSelectedIndex(0);
@@ -546,7 +545,7 @@ public class MiddlePanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JLabel jsonLabel = new JLabel("JSON");
-                    jsonLabel.addMouseListener(new selectTabHandler());
+                    jsonLabel.addMouseListener(new SelectTabHandler());
                     tabs.setTabComponentAt(0, jsonLabel);
                     tabs.setComponentAt(0, json);
                     tabs.setSelectedIndex(0);
@@ -557,7 +556,7 @@ public class MiddlePanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JLabel binaryLabel = new JLabel("Binary");
-                    binaryLabel.addMouseListener(new selectTabHandler());
+                    binaryLabel.addMouseListener(new SelectTabHandler());
                     tabs.setTabComponentAt(0, binaryLabel);
                     tabs.setComponentAt(0, binary);
                     tabs.setSelectedIndex(0);
@@ -568,7 +567,7 @@ public class MiddlePanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JLabel noBodyLabel = new JLabel("No Body");
-                    noBodyLabel.addMouseListener(new selectTabHandler());
+                    noBodyLabel.addMouseListener(new SelectTabHandler());
                     tabs.setTabComponentAt(0, noBodyLabel);
                     tabs.setComponentAt(0, noBody);
                     tabs.setSelectedIndex(0);

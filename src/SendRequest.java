@@ -84,11 +84,11 @@ public class SendRequest extends SwingWorker {
             try {
                 model.requestProcessing(selectedRequest.build());
             } catch (IOException | ProtocolException | URISyntaxException ex) {
-                selectedRequest.setResponseSize(0);
-                selectedRequest.setResponseStatusMessage("Error");
-                selectedRequest.setResponseTime(0);
-                selectedRequest.setResponseBody("Error: " + ex.getMessage());
-                selectedRequest.setResponseHeaders(null);
+                selectedRequest.getResponse().setSize(0);
+                selectedRequest.getResponse().setStatusMessage("Error");
+                selectedRequest.getResponse().setTime(0);
+                selectedRequest.getResponse().setBody("Error: " + ex.getMessage());
+                selectedRequest.getResponse().setHeaders(null);
                 rightPanel.revalidate();
                 ex.printStackTrace();
             }

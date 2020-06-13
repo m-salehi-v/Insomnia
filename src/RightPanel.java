@@ -1,5 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 /**
  * this class represents right panel of the application that holds
@@ -11,7 +16,10 @@ public class RightPanel extends JPanel {
     private JPanel topPanel;
     private JTabbedPane tabs;
     private JPanel header;
+    private JPanel raw;
     private JPanel preview;
+    private JEditorPane editorPane;
+
 
     /**
      * Instantiates a new Right panel.
@@ -27,8 +35,8 @@ public class RightPanel extends JPanel {
         add(tabs, BorderLayout.CENTER);
     }
 
-    public JPanel getPreview() {
-        return preview;
+    public JPanel getRaw() {
+        return raw;
     }
 
     public JPanel getTopPanel() {
@@ -41,6 +49,15 @@ public class RightPanel extends JPanel {
 
     public JPanel getHeader() {
         return header;
+    }
+
+    public void setEditorPaneURL(String url){
+        try {
+            editorPane.setPage(url);
+        } catch (IOException e) {
+            editorPane.setContentType("text/html");
+            editorPane.setText("<html><h1>Could not load</h1></html>");
+        }
     }
 
     //initializes top panel that holds three labels to show response status
@@ -62,15 +79,23 @@ public class RightPanel extends JPanel {
     public void addSizeLabel(int size){
         topPanel.add(createSizeLabel(size));
     }
+
+    public JEditorPane getEditorPane() {
+        return editorPane;
+    }
+
     //initializes tabs that are header and preview
     private void tabsInit(){
         tabs = new JTabbedPane();
 
         headerInit();
 
+        rawInit();
         previewInit();
-
-        tabs.add(preview, "Preview");
+        JLabel viewLabel = new JLabel("Raw");
+        viewLabel.addMouseListener(new SelectTabHandler());
+        tabs.add(raw, "Raw");
+        tabs.setTabComponentAt(0, viewLabel);
         tabs.add(new JScrollPane(header), "Header");
         tabs.setFont(new Font(null, Font.PLAIN, 13));
         tabs.setForegroundAt(0, new Color(187, 187, 187));
@@ -141,14 +166,23 @@ public class RightPanel extends JPanel {
         header.add(button);
 
     }
-    private void previewInit(){
-        preview = new JPanel(new BorderLayout());
+    private void rawInit(){
+        raw = new JPanel(new BorderLayout());
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setBackground(new Color(46, 47, 43));
         textArea.setLineWrap(true);
-        preview.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        raw.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        raw.setBackground(new Color(46, 47, 43));
+    }
+
+    private void previewInit(){
+        preview = new JPanel(new BorderLayout());
         preview.setBackground(new Color(46, 47, 43));
+        editorPane = new JEditorPane();
+        editorPane.setEditable(false);
+        editorPane.setBackground(new Color(225, 225, 225));
+        preview.add(new JScrollPane(editorPane), BorderLayout.CENTER);
     }
 
     //creating a new name and value and putting them in a panel to be added to
@@ -186,5 +220,41 @@ public class RightPanel extends JPanel {
         panel.add(textAreas, BorderLayout.NORTH);
 
         header.add(panel);
+    }
+    private class SelectTabHandler extends MouseAdapter {
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            JPopupMenu popupMenu = new JPopupMenu();
+            JMenuItem menuItem1 = new JMenuItem("Raw Data");
+            JMenuItem menuItem2 = new JMenuItem("Visual Preview");
+            menuItem1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel rawLabel = new JLabel("Raw");
+                    rawLabel.addMouseListener(new SelectTabHandler());
+                    tabs.setTabComponentAt(0, rawLabel);
+                    tabs.setComponentAt(0, raw);
+                    tabs.setSelectedIndex(0);
+                    revalidate();
+                }
+            });
+            menuItem2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel previewLabel = new JLabel("Preview");
+                    previewLabel.addMouseListener(new SelectTabHandler());
+                    tabs.setTabComponentAt(0, previewLabel);
+                    tabs.setComponentAt(0, preview);
+                    tabs.setSelectedIndex(0);
+                    revalidate();
+                }
+            });
+            popupMenu.add(menuItem1);
+            popupMenu.add(menuItem2);
+            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON1) {
+                popupMenu.show(e.getComponent(), e.getX(), e.getY() + 5);
+            }
+        }
+
     }
 }
