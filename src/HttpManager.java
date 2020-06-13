@@ -85,22 +85,6 @@ public class HttpManager {
         }
     }
 
-    private void printHelp() {
-        System.out.println("-M\n--method       Set request method with the parameter followed by this argument");
-        System.out.println("-H\n--headers      Set request headers in this format \"key1:value1;key2:value2;...\"");
-        System.out.println("-i             to show response headers");
-        System.out.println("-f             to automatically follow redirects");
-        System.out.println("-O\n--output       Save response body in a file named by the parameter after this argument");
-        System.out.println("-S\n--save         Save current request");
-        System.out.println("-d\n--data         Send multipart form data in this format: \"name1=value1&name2=value2&...\"");
-        System.out.println("--upload       send file: --upload \"file path\"");
-        System.out.println("--urlencoded   send urlencoded body in this format: \"name1=value1&name2=value2&...\"");
-        System.out.println("-json          send json body in this format: \"{name1:value1,name2:value2,...}\"");
-        System.out.println("fire           used to send saved requests: fire 1 3");
-        System.out.println("list           shows all saved requests");
-        System.out.println();
-    }
-
     public void updateRequests() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("Saved Requests/requests.bin")))) {
             oos.writeObject(requests);

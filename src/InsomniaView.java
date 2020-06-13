@@ -71,8 +71,7 @@ public class InsomniaView extends JFrame {
                 if (hideInSystemTray) {
                     setVisible(false);
                     systemTray();
-                }
-                else
+                } else
                     System.exit(0);
             }
         });
@@ -83,7 +82,7 @@ public class InsomniaView extends JFrame {
         toggleFullScreen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!isFullScreen){
+                if (!isFullScreen) {
                     setExtendedState(JFrame.MAXIMIZED_BOTH);
                     isFullScreen = true;
                 } else {
@@ -115,10 +114,28 @@ public class InsomniaView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Developed by Mohammad Salehi Vaziri\n" +
-                        "ID: 9831037\nemail: mohammadsalehivaziri@gmail.com\n","About", JOptionPane.INFORMATION_MESSAGE);
+                        "ID: 9831037\nemail: mohammadsalehivaziri@gmail.com\n", "About", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         JMenuItem help = new JMenuItem("Help", 'H');
+        help.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,
+                        "\n-M\n--method       Set request method with the parameter followed by this argument\n"
+                                + "-H\n--headers       Set request headers in this format \"key1:value1;key2:value2;...\"\n"
+                                + "-i                  to show response headers\n"
+                                + "-f                  to automatically follow redirects\n"
+                                + "-O\n--output        Save response body in a file named by the parameter after this argument\n"
+                                + "-S\n--save          Save current request\n"
+                                + "-d\n--data          Send multipart form data in this format: \"name1=value1&name2=value2&...\"\n"
+                                + "--upload            send file: --upload \"file path\"\n"
+                                + "--urlencoded        send urlencoded body in this format: \"name1=value1&name2=value2&...\"\n"
+                                + "-json               send json body in this format: \"{name1:value1,name2:value2,...}\"\n"
+                                + "fire                used to send saved requests: fire 1 3\n"
+                                + "list                shows all saved requests", "Help", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
         help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         helpMenu.add(about);
         helpMenu.add(help);
@@ -131,7 +148,7 @@ public class InsomniaView extends JFrame {
 
     //forms the main frame of the application using JSplitPane and three panels
     //from LeftPanel, MiddlePanel and RightPanel classes.
-    private void initFrame(){
+    private void initFrame() {
         setSize(1175, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -155,9 +172,9 @@ public class InsomniaView extends JFrame {
     }
 
     //puts the program in system tray
-    private void systemTray(){
+    private void systemTray() {
         TrayIcon trayIcon = null;
-        if (SystemTray.isSupported()){
+        if (SystemTray.isSupported()) {
             SystemTray tray = SystemTray.getSystemTray();
 
             Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("res/insomnia.png"));
@@ -192,15 +209,15 @@ public class InsomniaView extends JFrame {
     }
 
     //shows options frame with two check boxes.
-    private void showOptionsFrame(){
+    private void showOptionsFrame() {
         JFrame frame = new JFrame("Options");
         frame.setLocationRelativeTo(null);
-        frame.setSize(300,150);
+        frame.setSize(300, 150);
         frame.setResizable(false);
         frame.setIconImage(new ImageIcon(this.getClass().getResource("res/Insomnia.png")).getImage());
 
-        JPanel framePanel = new JPanel(new BorderLayout(10,10));
-        framePanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        JPanel framePanel = new JPanel(new BorderLayout(10, 10));
+        framePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JCheckBox checkBox1 = new JCheckBox("Follow Redirect");
         JCheckBox checkBox2 = new JCheckBox("Hide in System Tray");
